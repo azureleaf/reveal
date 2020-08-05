@@ -8,12 +8,13 @@
 
 - [Study Notes for Coding](#study-notes-for-coding)
 - [ToC](#toc)
-- [AWS](#aws)
-  - [Products: Computing](#products-computing)
-  - [Products: Storage](#products-storage)
-  - [Products: Management](#products-management)
-  - [Products: Management](#products-management-1)
+- [MISC](#misc)
   - [CS Books](#cs-books)
+- [AWS](#aws)
+  - [AWS Products: Computing](#aws-products-computing)
+  - [AWS Products: Storage](#aws-products-storage)
+  - [AWS Products: Management](#aws-products-management)
+  - [AWS Products: Management](#aws-products-management-1)
   - [AWS: Networking](#aws-networking)
   - [AWS: MISC](#aws-misc)
   - [AWS: MISC](#aws-misc-1)
@@ -21,7 +22,7 @@
   - [AWS + Laravel: Refs](#aws--laravel-refs)
   - [AWS + Laravel:](#aws--laravel-1)
   - [AWS + Laravel: References](#aws--laravel-references)
-- [Backends](#backends)
+- [Backend](#backend)
   - [IaC: What’s this?](#iac-whats-this)
   - [IaC: Products](#iac-products)
   - [Search](#search)
@@ -52,7 +53,7 @@
 - [Testing](#testing)
 - [Gaming](#gaming)
   - [Data format used for server-client comm.](#data-format-used-for-server-client-comm)
-  - [MISC](#misc)
+  - [MISC](#misc-1)
   - [Maintenance](#maintenance)
 - [Network](#network)
   - [Network: MISC](#network-misc)
@@ -87,11 +88,25 @@
 
 ---
 
+# MISC
+
+>>>
+
+## CS Books
+
+- Readable Code
+- Refactoring
+- Algorithm
+- Network
+- Computer Architecture
+
+---
+
 # AWS
 
 >>>
 
-## Products: Computing
+## AWS Products: Computing
 
 - EC2
   - EC2 / ELB
@@ -104,7 +119,7 @@
 
 >>>
 
-## Products: Storage
+## AWS Products: Storage
 
 - S3
 - EFS: Elastic File System
@@ -115,33 +130,21 @@
 
 >>>
 
-## Products: Management
+## AWS Products: Management
 
 - CloudWatch
 - LB: LoadBalancing
 
 >>>
 
-## Products: Management
+## AWS Products: Management
 - CloudWatch
 - Load Balancing
 - Application LB
 - Network LB
 - Classic LB
 
-
 >>>
-
-
-## CS Books
-
-- Readable Code
-- Refactoring
-- Algorithm
-- Network
-- Computer Architecture
-
----
 
 ## AWS: Networking
 - CloudFront
@@ -153,6 +156,7 @@
 >>>
 
 ## AWS: MISC
+
 - AWS Athena
 - Search S3 storage with queries
 - AWS Glue
@@ -213,7 +217,7 @@
 
 ---
 
-# Backends
+# Backend
 
 >>>
 
@@ -257,9 +261,9 @@
 
 ## Server
 
-- LAMP: Linux Apache MySQL PHP/Python/Perl
-- LEMP
-- MEAN
+- LAMP: Linux + Apache + MySQL + PHP/Python/Perl
+- LEMP: Nginx
+- MEAN: Mongo + Express + Angular + Node
 
 >>>
 
