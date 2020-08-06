@@ -12,9 +12,10 @@
   - [CS Books](#cs-books)
 - [AWS](#aws)
   - [AWS Products: Computing](#aws-products-computing)
+  - [AWS Products: Container](#aws-products-container)
+  - [AWS: w/o Fargate](#aws-wo-fargate)
   - [AWS Products: Storage](#aws-products-storage)
   - [AWS Products: Management](#aws-products-management)
-  - [AWS Products: Management](#aws-products-management-1)
   - [AWS: Networking](#aws-networking)
   - [AWS: MISC](#aws-misc)
   - [AWS: MISC](#aws-misc-1)
@@ -36,9 +37,11 @@
   - [Monitoring Servers](#monitoring-servers)
   - [Monitoring: MISC](#monitoring-misc)
   - [Monitoring: Visualization](#monitoring-visualization)
-  - [TTFB](#ttfb)
   - [Server Product](#server-product)
   - [Deployment Env.](#deployment-env)
+- [Quality Control](#quality-control)
+  - [Frontend Performance: Tools](#frontend-performance-tools)
+  - [Frontend Performance: TTFB](#frontend-performance-ttfb)
 - [DB](#db)
   - [DB MISC](#db-misc)
   - [SQL](#sql)
@@ -108,14 +111,30 @@
 
 ## AWS Products: Computing
 
-- EC2
+- EC2: Elastic Compute Cloud
   - EC2 / ELB
 - Lightsail
 - Lambda
-- ECS
-- EKS
 - Elastic Beanstalk
+
+>>>
+
+## AWS Products: Container
+
+- ECS: Elastic Container Service
+- EKS: Elastic Kubernetes Service
 - Fargate
+  - Compute Engine for ECS / EKS
+
+>>>
+
+## AWS: w/o Fargate
+
+1. Build the container image 
+2. Deploy EC2 instances (Fargate does this instead of you!)
+3. Define memory resources
+4. Isolate apps with VMs (Fargate does this instead of you!)
+5. Run app
 
 >>>
 
@@ -134,10 +153,7 @@
 
 - CloudWatch
 - LB: LoadBalancing
-
->>>
-
-## AWS Products: Management
+- App Mesh
 - CloudWatch
 - Load Balancing
 - Application LB
@@ -171,6 +187,7 @@
 ## AWS: MISC
 
 - AWS cli
+- Amazon Linux
 
 >>>
 
@@ -319,17 +336,6 @@
 
 >>>
 
-## TTFB
-
-- DNS
-- Connect
-- SSL
-- Send
-- Wait
-- Receive
-
->>>
-
 ## Server Product
 
 - Apache
@@ -343,6 +349,30 @@
 - Production Env. 本番環境
 - Staging Env.
 - Testing Env.
+
+---
+
+# Quality Control
+
+>>>
+
+
+## Frontend Performance: Tools
+
+- Lighthouse
+
+
+>>>
+
+## Frontend Performance: TTFB
+
+- DNS
+- Connect
+- SSL
+- Send
+- Wait
+- Receive
+
 
 ---
 
