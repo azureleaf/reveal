@@ -1,35 +1,46 @@
-# Study Notes for Coding
+## Study Notes for Coding
 
 ---
 
-# ToC
+## ToC
 
 >>>
 
-- [Study Notes for Coding](#study-notes-for-coding)
-- [ToC](#toc)
 - [MISC](#misc)
   - [CS Books](#cs-books)
 - [AWS](#aws)
+  - [AWS Basics:](#aws-basics)
+  - [Creating Instance](#creating-instance)
   - [AWS Products: Computing](#aws-products-computing)
   - [AWS Products: Container](#aws-products-container)
-  - [AWS: w/o Fargate](#aws-wo-fargate)
+  - [AWS: Why use Fargate?](#aws-why-use-fargate)
   - [AWS Products: Storage](#aws-products-storage)
   - [AWS Products: Management](#aws-products-management)
-  - [AWS: Networking](#aws-networking)
+  - [AWS Services for Networking](#aws-services-for-networking)
+  - [AWS Products: MISC](#aws-products-misc)
   - [AWS: MISC](#aws-misc)
-  - [AWS: MISC](#aws-misc-1)
+  - [AWS EC2](#aws-ec2)
+  - [AWS VPC: Features](#aws-vpc-features)
+  - [AWS VPC: Keywords](#aws-vpc-keywords)
+  - [AWS VPC: Config Example 1](#aws-vpc-config-example-1)
+  - [AWS VPC: Config Example 2](#aws-vpc-config-example-2)
   - [AWS + Laravel](#aws--laravel)
   - [AWS + Laravel: Refs](#aws--laravel-refs)
   - [AWS + Laravel:](#aws--laravel-1)
   - [AWS + Laravel: References](#aws--laravel-references)
+- [Frontend](#frontend)
+  - [MISC](#misc-1)
+  - [Framework](#framework)
+  - [Frontend Libs](#frontend-libs)
+  - [Design Libs](#design-libs)
+  - [SSR vs SSG](#ssr-vs-ssg)
 - [Backend](#backend)
   - [IaC: What’s this?](#iac-whats-this)
   - [IaC: Products](#iac-products)
   - [Search](#search)
   - [Big Data](#big-data)
   - [Connection](#connection)
-  - [Server](#server)
+  - [Web Stack](#web-stack)
   - [Server Types](#server-types)
   - [Monitoring: Services](#monitoring-services)
   - [Monitoring: CloudWatch](#monitoring-cloudwatch)
@@ -40,11 +51,25 @@
   - [Server Product](#server-product)
   - [Deployment Env.](#deployment-env)
 - [Quality Control](#quality-control)
-  - [Frontend Performance: Tools](#frontend-performance-tools)
+  - [Testing Types](#testing-types)
+  - [Tools](#tools)
   - [Frontend Performance: TTFB](#frontend-performance-ttfb)
 - [DB](#db)
   - [DB MISC](#db-misc)
   - [SQL](#sql)
+  - [Distributed DB](#distributed-db)
+  - [Transaction](#transaction)
+  - [RDB](#rdb)
+  - [ER](#er)
+- [Operating System](#operating-system)
+  - [Mutual Exclusion](#mutual-exclusion)
+  - [Automaton](#automaton)
+- [Computer Architecture](#computer-architecture)
+  - [Memory](#memory)
+  - [CPU](#cpu)
+  - [GPU](#gpu)
+  - [Primary Storage](#primary-storage)
+  - [Secondary Storage](#secondary-storage)
 - [Software Engineering](#software-engineering)
   - [Dev.](#dev)
   - [Agile Dev. vs Waterfall Dev.](#agile-dev-vs-waterfall-dev)
@@ -53,24 +78,47 @@
   - [Design Pattern](#design-pattern)
   - [CI/CD Tools: Products](#cicd-tools-products)
   - [CI/CD Tools: Why necessary?](#cicd-tools-why-necessary)
-- [Testing](#testing)
+  - [Modular Programming](#modular-programming)
+  - [Cohesion](#cohesion)
+  - [Coupling](#coupling)
+  - [Redundancy Tips](#redundancy-tips)
+  - [Redundancy: Number of](#redundancy-number-of)
 - [Gaming](#gaming)
   - [Data format used for server-client comm.](#data-format-used-for-server-client-comm)
-  - [MISC](#misc-1)
+  - [MISC](#misc-2)
   - [Maintenance](#maintenance)
 - [Network](#network)
   - [Network: MISC](#network-misc)
+  - [DNS](#dns)
+  - [IPv4:](#ipv4)
+  - [IPv6:](#ipv6)
   - [TCP / IP Model](#tcp--ip-model)
   - [OSI Model](#osi-model)
-  - [Tools](#tools)
+  - [Tools](#tools-1)
+  - [Network Devices](#network-devices)
+  - [Network Devices](#network-devices-1)
+  - [LAN Topology](#lan-topology)
+  - [LAN Access Control Methods](#lan-access-control-methods)
+  - [WLAN](#wlan)
+  - [Network Cables](#network-cables)
   - [TCP / IP](#tcp--ip)
+- [Security](#security)
+  - [Attacks](#attacks)
+  - [Encrytion](#encrytion)
+  - [CORS](#cors)
+  - [CSRF](#csrf)
+- [Authentication & Authorization](#authentication--authorization)
+  - [JWT](#jwt)
+  - [Social Login](#social-login)
+  - [Passport](#passport)
+  - [Cookie & Session](#cookie--session)
 - [Virtualization](#virtualization)
-- [Tools](#tools-1)
-- [Computer Architecture](#computer-architecture)
+  - [Tools](#tools-2)
+- [Computer Architecture](#computer-architecture-1)
 - [Algorithm](#algorithm)
-- [Data Structure](#data-structure)
-- [shell](#shell)
-  - [PHP](#php)
+  - [Data Structure](#data-structure)
+  - [shell](#shell)
+- [PHP](#php)
   - [PHP Tools](#php-tools)
   - [Laravel Topics ***](#laravel-topics-)
   - [Laravel Topics **](#laravel-topics--1)
@@ -109,13 +157,43 @@
 
 >>>
 
+## AWS Basics:
+
+- AMI: Amazon Machine Image
+- VPC: Virtual Private Cloud
+  - EC2 (server) + VPC (network) is the major combination
+- Region:
+  - "ap-northeast-1" is for Tokyo
+- AZ: Availability Zone
+  - A region has multiple data centers
+  - A service can ber deployed to multiple AZs for redundancy
+- Instance
+- EBS: Elastic Block Store
+  - Virtual hard disks
+- IAM: Identity and Access Management
+- Security Group
+
+>>>
+
+## Creating Instance
+
+1. Choose AMI
+2. Choose an instance type
+3. Configure the instance details
+4. Add tags
+5. Set up Security group
+6. Start
+
+>>>
+
 ## AWS Products: Computing
 
-- EC2: Elastic Compute Cloud
-  - EC2 / ELB
+- * EC2: Elastic Compute Cloud
 - Lightsail
-- Lambda
+- *Lambda
+  - Run the code triggered by the events
 - Elastic Beanstalk
+  - PaaS for PHP, Node, Python, Docker... etc.
 
 >>>
 
@@ -128,7 +206,7 @@
 
 >>>
 
-## AWS: w/o Fargate
+## AWS: Why use Fargate?
 
 1. Build the container image 
 2. Deploy EC2 instances (Fargate does this instead of you!)
@@ -140,38 +218,41 @@
 
 ## AWS Products: Storage
 
-- S3
+- *S3: Simple Store Service
+  - Cheap
+- *RDS: Relational Database Service
+  - MySQL, Oracle, Postgres, SQL Server...
 - EFS: Elastic File System
-- RDS
 - DynamoDB
 - ElasiCache
 - RedShift
+- AWS Aurora: RDB compatible with MySQL / PostgreSQL
 
 >>>
 
 ## AWS Products: Management
 
-- CloudWatch
-- LB: LoadBalancing
+- *CloudWatch
+- *ELB: Elastic Load Balancing
+  - Application LB
+  - Network LB
+  - Classic LB
+- *Auto Scaling
+  - 
 - App Mesh
-- CloudWatch
-- Load Balancing
-- Application LB
-- Network LB
-- Classic LB
 
 >>>
 
-## AWS: Networking
+## AWS Services for Networking
+
 - CloudFront
 - VPC: Virtual Private Cloud
 - selection of your own IP address range, creation of subnets, and configuration of route tables and network gateways
-- AWS > VPC > Public Subnet + Private Subnet
 - API Gateway
 
 >>>
 
-## AWS: MISC
+## AWS Products: MISC
 
 - AWS Athena
 - Search S3 storage with queries
@@ -180,7 +261,7 @@
 - AWS Elastic Beanstalk
 - Amazon SNS: Simple Notification Service
 - Amazon SQS: Simple Query Service
-- Aurora
+- AWS Snowball
 
 >>>
 
@@ -188,6 +269,54 @@
 
 - AWS cli
 - Amazon Linux
+
+>>>
+
+
+## AWS EC2
+
+- t2.micro
+  - Instance type (free tier)
+
+>>>
+
+## AWS VPC: Features
+
+- EC2 (server) + VPC (network) is a major combination
+- A VPC can have multiple AZs
+
+
+## AWS VPC: Keywords
+
+- IGW: Internet gateway
+  - Let the VPC connect to the internet
+- NGW: NAT gateway
+- Subnet
+  - Public Subnet
+  - Private Subnet
+- Route table
+- Router
+- VPC Peering
+- Endpoints for S3
+- Elastic IP
+  - Reachable IPv4 address from the internet
+  - After you get the Elastic IP, you must assign it to your EC2 instance
+
+>>>
+
+## AWS VPC: Config Example 1
+
+- Internet -(IGW)- VPC > AZ (has Subnets)
+  - IGW > Public Subnet > t2.micro Instance
+  - IGW > Public Subnet > NGW > Private Subnet > DB
+
+## AWS VPC: Config Example 2
+
+- Internet - (ELB)
+  - EC2 1 in AZ 1 -> RDS 1 -> RDS 2 (replicate of RDS 1)
+  - EC2 2 in AZ 2 -> RDS 1 -> RDS 2 (replicate of RDS 1)
+
+
 
 >>>
 
@@ -234,6 +363,50 @@
 
 ---
 
+# Frontend
+
+>>>
+
+## MISC
+
+- Service Worker
+- PWA
+- SSG: Static Site Generation
+- SSR: Server Side Rendering
+
+>>>
+
+## Framework
+
+- Vue
+- React
+- Angular
+
+>>>
+
+## Frontend Libs
+
+- Storybook
+- Nuxt.js
+
+## Design Libs
+
+- Vuetify
+- Elm
+- Semantic UI
+
+>>>
+
+## SSR vs SSG
+
+- Nuxt.js
+  - Universal Mode: 
+  - SPA Mode 
+
+
+
+---
+
 # Backend
 
 >>>
@@ -276,11 +449,12 @@
 
 >>>
 
-## Server
+## Web Stack
 
 - LAMP: Linux + Apache + MySQL + PHP/Python/Perl
 - LEMP: Nginx
 - MEAN: Mongo + Express + Angular + Node
+- JAMstack: JS + API + Markup
 
 >>>
 
@@ -356,11 +530,30 @@
 
 >>>
 
+## Testing Types
 
-## Frontend Performance: Tools
+- Unit Test
+- Integration Test
 
+>>>
+
+## Tools
+
+- JEST
+- Mocha
+- Jasmine
+- Cypress
+- Puppeteer
+  - E2E
+- Chai
+- PHPUnit (for PHP)
+- Enzyme (for React)
+- Postman
+  - API
+- Storybook
+  - UI test
 - Lighthouse
-
+  - Website Performance
 
 >>>
 
@@ -381,6 +574,7 @@
 >>>
 
 ## DB MISC
+
 - KVS: Key Value Store
 - memcached
 
@@ -393,6 +587,84 @@
   - e.g. CREATE, ALTER, DROP
 - DCL: Data Control Language
   - Define DB Authorization
+
+>>>
+
+## Distributed DB
+
+- 
+
+>>>
+
+## Transaction
+
+>>>
+
+## RDB
+
+>>>
+
+## ER
+
+---
+
+# Operating System
+
+>>>
+
+## Mutual Exclusion
+
+>>>
+
+
+## Automaton
+
+---
+
+# Computer Architecture
+
+>>>
+
+## Memory
+
+- ROM
+- RAM
+  - DRAM: Dynamic RAM
+    - SDRAM: Synchronous DRAM
+    - RDRAM: Rambus DRAM
+    - DDR SDRAM: Double Data Rate SDRAM
+      - DDR1
+      - DDR2
+      - DDR3
+      - DDR4
+      - 
+  - SRAM: 
+
+>>>
+
+## CPU
+
+>>>
+
+## GPU
+
+
+>>>
+
+## Primary Storage
+
+- Processor Registers
+- Processor Cache
+
+>>>
+
+
+## Secondary Storage
+
+- HDD
+- SSD
+- 
+
 
 ---
 
@@ -466,9 +738,35 @@
 - Build Automation
 - Automated Deployment
 
----
+>>>
 
-# Testing
+## Modular Programming
+
+>>>
+
+## Cohesion
+
+- Co-incidental Cohesion
+
+>>>
+
+## Coupling
+
+- 
+
+>>>
+
+## Redundancy Tips
+
+- RAID
+- 
+
+>>>
+
+## Redundancy: Number of 
+
+- DMR: Dual Modular Redundancy
+- TMR: Triple Modular Redundancy
 
 ---
 
@@ -508,6 +806,23 @@
 
 >>>
 
+## DNS
+
+- 
+
+>>>
+
+## IPv4:
+
+>>>
+
+## IPv6:
+
+
+
+
+>>>
+
 ## TCP / IP Model
 
 >>>
@@ -523,7 +838,83 @@
 
 >>>
 
+## Network Devices
+
+- DTE: Data Terminal Equipment
+- DCE: Data Circuit Terminating Equipment
+
+## Network Devices
+
+- Hub
+- Repeater
+- Bridge
+- Router
+- Switch
+
+## LAN Topology
+
+- Bass
+- Star
+- Ring
+
+## LAN Access Control Methods
+
+- CSMA/CD
+- Token Passing
+
+## WLAN
+
+- 
+
+
+## Network Cables
+
+- 
+
+
+>>>
+
 ## TCP / IP
+
+---
+
+# Security
+
+>>>
+
+## Attacks
+
+- DDoS
+
+
+>>>
+
+
+## Encrytion
+
+>>>
+
+## CORS
+
+>>>
+
+## CSRF
+
+---
+
+# Authentication & Authorization
+
+>>>
+
+## JWT
+
+## Social Login
+
+## Passport
+
+>>>
+
+## Cookie & Session
 
 ---
 
@@ -531,7 +922,7 @@
 
 >>>
 
-# Tools
+## Tools
 
 - Vagrant
 - Virtual Box
@@ -551,14 +942,14 @@
 >>>
 
 
-# Data Structure
+## Data Structure
 
 >>>
 
 
 >>>
 
-# shell
+## shell
 
 >>>
 
@@ -579,7 +970,7 @@
 
 ---
 
-## PHP
+# PHP
 
 >>>
 
@@ -589,6 +980,7 @@
 - php.ini
 - php -a
 - php -f hello.php
+- phpinfo
 
 >>>
 
