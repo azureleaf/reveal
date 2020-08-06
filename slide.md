@@ -694,8 +694,8 @@
 
 - Daily Scrum
 - Sprint Planning
-- Spring
-- Spring Review
+- Sprint
+- Sprint Review
 
 >>>
 
