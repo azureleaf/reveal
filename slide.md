@@ -9,19 +9,24 @@
 - [MISC](#misc)
   - [CS Books](#cs-books)
 - [AWS](#aws)
+  - [Xaas](#xaas)
+  - [XaaS Comparison](#xaas-comparison)
   - [AWS Basics:](#aws-basics)
+  - [Region & AZ](#region--az)
   - [Creating Instance](#creating-instance)
   - [AWS Products: Computing](#aws-products-computing)
   - [AWS Products: Container](#aws-products-container)
   - [AWS: Why use Fargate?](#aws-why-use-fargate)
   - [AWS Products: Storage](#aws-products-storage)
   - [AWS Products: Management](#aws-products-management)
+  - [AWS Monitoring](#aws-monitoring)
   - [AWS Services for Networking](#aws-services-for-networking)
+  - [AWS VPC: Features](#aws-vpc-features)
+  - [AWS VPC: Keywords](#aws-vpc-keywords)
+  - [AWS VPC Gateways](#aws-vpc-gateways)
   - [AWS Products: MISC](#aws-products-misc)
   - [AWS: MISC](#aws-misc)
   - [AWS EC2](#aws-ec2)
-  - [AWS VPC: Features](#aws-vpc-features)
-  - [AWS VPC: Keywords](#aws-vpc-keywords)
   - [AWS VPC: Config Example 1](#aws-vpc-config-example-1)
   - [AWS VPC: Config Example 2](#aws-vpc-config-example-2)
   - [AWS + Laravel](#aws--laravel)
@@ -82,13 +87,16 @@
   - [Cohesion](#cohesion)
   - [Coupling](#coupling)
   - [Redundancy Tips](#redundancy-tips)
-  - [Redundancy: Number of](#redundancy-number-of)
+  - [Redundancy: Number of entities](#redundancy-number-of-entities)
+  - [Redundancy: Roles](#redundancy-roles)
+  - [- Main usage: Primary HTTP Server + Failover HTTP Server](#ullimain-usage-primary-http-server--failover-http-serverliul)
 - [Gaming](#gaming)
   - [Data format used for server-client comm.](#data-format-used-for-server-client-comm)
   - [MISC](#misc-2)
   - [Maintenance](#maintenance)
 - [Network](#network)
   - [Network: MISC](#network-misc)
+  - [Latency vs Bandwidth](#latency-vs-bandwidth)
   - [DNS](#dns)
   - [IPv4:](#ipv4)
   - [IPv6:](#ipv6)
@@ -157,21 +165,51 @@
 
 >>>
 
+## Xaas
+
+- IaaS: Infrastructure
+  - Similar to conventional hosting services, however you can customize hardwares flexibly
+- PaaS: Platform
+- SaaS: Software
+- BaaS / mBaaS: Backend 
+
+>>>
+
+## XaaS Comparison
+
+|                | On-Premises |          IaaS          |                      PaaS                       |                  SaaS                   |
+| -------------- | :---------: | :--------------------: | :---------------------------------------------: | :-------------------------------------: |
+| Application    |    user     |          user          |                      user                       |                provider                 |
+| Data           |    user     |          user          |                      user                       |                provider                 |
+| Runtime        |    user     |          user          |                    provider                     |                provider                 |
+| Middleware     |    user     |          user          |                    provider                     |                provider                 |
+| OS             |    user     |          user          |                    provider                     |                provider                 |
+| Virtualization |    user     |        provider        |                    provider                     |                provider                 |
+| Servers        |    user     |        provider        |                    provider                     |                provider                 |
+| Storage        |    user     |        provider        |                    provider                     |                provider                 |
+| Networking     |    user     |        provider        |                    provider                     |                provider                 |
+| Examples:      |    user     | EC2, GCE, DigitalOcean | GAE, Beanstalk, Heroku, Azure, RedHat OpenShift | Google Apps, Salesforce, Dropbox, Slack |
+
+>>>
+
 ## AWS Basics:
 
 - AMI: Amazon Machine Image
-- VPC: Virtual Private Cloud
-  - EC2 (server) + VPC (network) is the major combination
-- Region:
-  - "ap-northeast-1" is for Tokyo
-- AZ: Availability Zone
-  - A region has multiple data centers
-  - A service can ber deployed to multiple AZs for redundancy
 - Instance
-- EBS: Elastic Block Store
-  - Virtual hard disks
-- IAM: Identity and Access Management
-- Security Group
+
+>>>
+
+## Region & AZ
+
+- Region:
+  - __ap-northeast-1__ is for Tokyo
+- AZ: Availability Zone
+  - A region has multiple AZ, that is, data centers
+  - A service can ber deployed to multiple AZs for redundancy
+  - Comm between multiple regions: High latency
+  - COmm between AZs inside the same region: Low latency
+- For high availability:
+  - Multi-AZs with Active-Passive / Active-Active
 
 >>>
 
@@ -189,11 +227,15 @@
 ## AWS Products: Computing
 
 - * EC2: Elastic Compute Cloud
+- *EBS: Elastic Block Store
+  - Virtual hard disks
 - Lightsail
 - *Lambda
   - Run the code triggered by the events
 - Elastic Beanstalk
   - PaaS for PHP, Node, Python, Docker... etc.
+- CodeStar
+  - CD (Continuous Delivery) tool: quick build & deployment
 
 >>>
 
@@ -203,6 +245,8 @@
 - EKS: Elastic Kubernetes Service
 - Fargate
   - Compute Engine for ECS / EKS
+- ECR: Elastic Container Registry
+  - Store of the Docker images
 
 >>>
 
@@ -232,14 +276,26 @@
 
 ## AWS Products: Management
 
-- *CloudWatch
 - *ELB: Elastic Load Balancing
   - Application LB
   - Network LB
   - Classic LB
 - *Auto Scaling
-  - 
+- IAM: Identity and Access Management
+  - Control the access to the AWS accounts
 - App Mesh
+- ParameterStore
+
+>>>
+
+## AWS Monitoring
+
+- *CloudWatch
+- DataDog
+  - DataDog is provided by DataDog corp, not by AWS
+  - Offer the console for the AWS monitoring services
+- CloudTrail
+  - Monitor the AWS Account activity
 
 >>>
 
@@ -247,8 +303,51 @@
 
 - CloudFront
 - VPC: Virtual Private Cloud
-- selection of your own IP address range, creation of subnets, and configuration of route tables and network gateways
+  - selection of your own IP address range, creation of subnets, and configuration of route tables and network gateways
+- Amazon Route 53: DNS service
+
+>>>
+
+## AWS VPC: Features
+
+- Major combination
+  - EBS (for permanet storage)
+  - EC2 (for server software)
+  - VPC (for network)
+- A VPC can have multiple AZs
+
+>>>
+
+## AWS VPC: Keywords
+
+- IGW: Internet gateway
+  - Let the VPC connect to the internet
+- NGW: NAT gateway
+- Subnet
+  - Public Subnet
+  - Private Subnet
+- Route table
+  - Define possible connections among internet / subnets
+- Router
+- VPC Peering
+- Endpoints for S3
+- Elastic IP
+  - Reachable IPv4 address from the internet
+  - After you get the Elastic IP, you must assign it to your EC2 instance
+- Security Group
+  - Firewall for each instance
+
+
+>>>
+
+## AWS VPC Gateways
+
 - API Gateway
+- Virtual Private Gateway
+- IGW: Internet Gateway
+- NGW: NAT gateway: Network Address Translation
+  - Enable instances in the private subnet connect to internet / other AWS services
+  - Disable the internet establish the connection to the instances
 
 >>>
 
@@ -280,29 +379,7 @@
 
 >>>
 
-## AWS VPC: Features
 
-- EC2 (server) + VPC (network) is a major combination
-- A VPC can have multiple AZs
-
-
-## AWS VPC: Keywords
-
-- IGW: Internet gateway
-  - Let the VPC connect to the internet
-- NGW: NAT gateway
-- Subnet
-  - Public Subnet
-  - Private Subnet
-- Route table
-- Router
-- VPC Peering
-- Endpoints for S3
-- Elastic IP
-  - Reachable IPv4 address from the internet
-  - After you get the Elastic IP, you must assign it to your EC2 instance
-
->>>
 
 ## AWS VPC: Config Example 1
 
@@ -763,11 +840,17 @@
 
 >>>
 
-## Redundancy: Number of 
+## Redundancy: Number of entities
 
 - DMR: Dual Modular Redundancy
 - TMR: Triple Modular Redundancy
 
+## Redundancy: Roles
+
+- Active-Active Clustering
+  - Mainly used for the load balancing
+- Active-Passive Clustering
+  - Main usage: Primary HTTP Server + Failover HTTP Server
 ---
 
 # Gaming
@@ -803,6 +886,10 @@
 ## Network: MISC
 
 - NFS: Network File System
+
+>>>
+
+## Latency vs Bandwidth
 
 >>>
 
