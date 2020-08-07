@@ -9,8 +9,6 @@
 - [MISC](#misc)
   - [CS Books](#cs-books)
 - [AWS](#aws)
-  - [Xaas](#xaas)
-  - [XaaS Comparison](#xaas-comparison)
   - [AWS Basics:](#aws-basics)
   - [Region & AZ](#region--az)
   - [Creating Instance](#creating-instance)
@@ -96,6 +94,13 @@
   - [Maintenance](#maintenance)
 - [Network](#network)
   - [Network: MISC](#network-misc)
+  - [Xaas](#xaas)
+  - [XaaS Comparison](#xaas-comparison)
+  - [VPN: What's this?](#vpn-whats-this)
+    - [Types](#types)
+  - [VPN: VPN vs Leased Line](#vpn-vpn-vs-leased-line)
+  - [VPN: Internet VPN technologies](#vpn-internet-vpn-technologies)
+  - [VPN: Protocols](#vpn-protocols)
   - [Latency vs Bandwidth](#latency-vs-bandwidth)
   - [DNS](#dns)
   - [IPv4:](#ipv4)
@@ -163,32 +168,6 @@
 
 # AWS
 
->>>
-
-## Xaas
-
-- IaaS: Infrastructure
-  - Similar to conventional hosting services, however you can customize hardwares flexibly
-- PaaS: Platform
-- SaaS: Software
-- BaaS / mBaaS: Backend 
-
->>>
-
-## XaaS Comparison
-
-|                | On-Premises |          IaaS          |                      PaaS                       |                  SaaS                   |
-| -------------- | :---------: | :--------------------: | :---------------------------------------------: | :-------------------------------------: |
-| Application    |    user     |          user          |                      user                       |                provider                 |
-| Data           |    user     |          user          |                      user                       |                provider                 |
-| Runtime        |    user     |          user          |                    provider                     |                provider                 |
-| Middleware     |    user     |          user          |                    provider                     |                provider                 |
-| OS             |    user     |          user          |                    provider                     |                provider                 |
-| Virtualization |    user     |        provider        |                    provider                     |                provider                 |
-| Servers        |    user     |        provider        |                    provider                     |                provider                 |
-| Storage        |    user     |        provider        |                    provider                     |                provider                 |
-| Networking     |    user     |        provider        |                    provider                     |                provider                 |
-| Examples:      |    user     | EC2, GCE, DigitalOcean | GAE, Beanstalk, Heroku, Azure, RedHat OpenShift | Google Apps, Salesforce, Dropbox, Slack |
 
 >>>
 
@@ -303,7 +282,9 @@
 
 - CloudFront
 - VPC: Virtual Private Cloud
-  - selection of your own IP address range, creation of subnets, and configuration of route tables and network gateways
+  - selection of your own IP address range
+  - creation of subnets
+  - configuration of route tables and network gateways
 - Amazon Route 53: DNS service
 
 >>>
@@ -320,9 +301,6 @@
 
 ## AWS VPC: Keywords
 
-- IGW: Internet gateway
-  - Let the VPC connect to the internet
-- NGW: NAT gateway
 - Subnet
   - Public Subnet
   - Private Subnet
@@ -337,17 +315,21 @@
 - Security Group
   - Firewall for each instance
 
-
 >>>
 
 ## AWS VPC Gateways
 
-- API Gateway
 - Virtual Private Gateway
+  - GW between the private network (such as on-premise server) & VPC
 - IGW: Internet Gateway
+  - GW between the internet & VPC
+  - Without this, instances can't have the global IP
 - NGW: NAT gateway: Network Address Translation
+  - GW between the internet & private subnet
   - Enable instances in the private subnet connect to internet / other AWS services
   - Disable the internet establish the connection to the instances
+- API Gateway
+- AWS Direct Connect
 
 >>>
 
@@ -886,6 +868,70 @@
 ## Network: MISC
 
 - NFS: Network File System
+
+
+>>>
+
+## Xaas
+
+- IaaS: Infrastructure
+  - Similar to conventional hosting services, however you can customize hardwares flexibly
+- PaaS: Platform
+- SaaS: Software
+- BaaS / mBaaS: Backend 
+
+>>>
+
+## XaaS Comparison
+
+|                | On-Premises |          IaaS          |                      PaaS                       |                  SaaS                   |
+| -------------- | :---------: | :--------------------: | :---------------------------------------------: | :-------------------------------------: |
+| Application    |    user     |          user          |                      user                       |                provider                 |
+| Data           |    user     |          user          |                      user                       |                provider                 |
+| Runtime        |    user     |          user          |                    provider                     |                provider                 |
+| Middleware     |    user     |          user          |                    provider                     |                provider                 |
+| OS             |    user     |          user          |                    provider                     |                provider                 |
+| Virtualization |    user     |        provider        |                    provider                     |                provider                 |
+| Servers        |    user     |        provider        |                    provider                     |                provider                 |
+| Storage        |    user     |        provider        |                    provider                     |                provider                 |
+| Networking     |    user     |        provider        |                    provider                     |                provider                 |
+| Examples:      |    user     | EC2, GCE, DigitalOcean | GAE, Beanstalk, Heroku, Azure, RedHat OpenShift | Google Apps, Salesforce, Dropbox, Slack |
+
+>>>
+
+## VPN: What's this?
+
+- Safe
+
+### Types
+- Internet VPN
+  - Cheap but not so safe as others
+- IP-VPN
+  - Closed network for the ISP and its users
+  - No need for encryption, however expensive
+- Entry VPN
+- WAE: Wide Area Ethernet
+  - Highly customizable, but expensive and narrow
+
+>>>
+
+## VPN: VPN vs Leased Line
+
+- Leased Line (専用線) is physical
+
+>>>
+
+## VPN: Internet VPN technologies
+
+- Tunneling
+- 
+
+## VPN: Protocols
+
+- IPsec-VPN
+- L2TP
+- PPTP
+- SSL-VPN
 
 >>>
 
