@@ -206,8 +206,6 @@
 ## AWS Products: Computing
 
 - * EC2: Elastic Compute Cloud
-- *EBS: Elastic Block Store
-  - Virtual hard disks
 - Lightsail
 - *Lambda
   - Run the code triggered by the events
@@ -243,6 +241,8 @@
 
 - *S3: Simple Store Service
   - Cheap
+- *EBS: Elastic Block Store
+  - Virtual hard disks
 - *RDS: Relational Database Service
   - MySQL, Oracle, Postgres, SQL Server...
 - EFS: Elastic File System
@@ -260,6 +260,7 @@
   - Network LB
   - Classic LB
 - *Auto Scaling
+- *CloudFormation
 - IAM: Identity and Access Management
   - Control the access to the AWS accounts
 - App Mesh
@@ -368,6 +369,8 @@
 - Internet -(IGW)- VPC > AZ (has Subnets)
   - IGW > Public Subnet > t2.micro Instance
   - IGW > Public Subnet > NGW > Private Subnet > DB
+
+>>>
 
 ## AWS VPC: Config Example 2
 
