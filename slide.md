@@ -2,6 +2,23 @@
 
 ---
 
+## Todos
+
+1. TCP/IP
+2. SSH & Encryption
+3. Cookie & Session
+4. PHP: array, control syntax
+5. PHP: interface, trait, class
+6. PHP: Class, constructor, destructor, inheritance, final
+7. IL tech blog
+8. PHP: File IO
+9.  PHP PDO, 
+10. SQL
+11. DB: Indexing, Regularization of the
+12. AWS
+
+---
+
 ## ToC
 
 >>>
@@ -38,6 +55,7 @@
   - [Frontend Libs](#frontend-libs)
   - [Design Libs](#design-libs)
   - [SSR vs SSG](#ssr-vs-ssg)
+  - [Cookie & Session](#cookie--session)
 - [Backend](#backend)
   - [IaC: What’s this?](#iac-whats-this)
   - [IaC: Products](#iac-products)
@@ -125,7 +143,7 @@
   - [JWT](#jwt)
   - [Social Login](#social-login)
   - [Passport](#passport)
-  - [Cookie & Session](#cookie--session)
+  - [Cookie & Session](#cookie--session-1)
 - [Virtualization](#virtualization)
   - [Tools](#tools-2)
 - [Computer Architecture](#computer-architecture-1)
@@ -469,7 +487,11 @@
   - Universal Mode: 
   - SPA Mode 
 
+>>>
 
+## Cookie & Session
+
+>>>
 
 ---
 
