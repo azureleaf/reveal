@@ -24,6 +24,7 @@
   - [AWS VPC Gateways](#aws-vpc-gateways)
   - [AWS Products: MISC](#aws-products-misc)
   - [AWS: MISC](#aws-misc)
+  - [AWS: Account](#aws-account)
   - [AWS EC2](#aws-ec2)
   - [AWS VPC: Config Example 1](#aws-vpc-config-example-1)
   - [AWS VPC: Config Example 2](#aws-vpc-config-example-2)
@@ -354,6 +355,13 @@
 
 >>>
 
+## AWS: Account
+
+- IAM: Identity and Access Management
+- Root Acount
+- IAM User
+
+>>>
 
 ## AWS EC2
 
@@ -361,8 +369,6 @@
   - Instance type (free tier)
 
 >>>
-
-
 
 ## AWS VPC: Config Example 1
 
@@ -378,19 +384,17 @@
   - EC2 1 in AZ 1 -> RDS 1 -> RDS 2 (replicate of RDS 1)
   - EC2 2 in AZ 2 -> RDS 1 -> RDS 2 (replicate of RDS 1)
 
-
-
 >>>
 
 ## AWS + Laravel
 
-- Launch Elastic Beanstalk env
-- Bundle Laravel app into .zip
-- Upload & deploy .zip on EB console
-- Configure doc root path
-- Add DB Instance
-- Configure /database.php
-- Bundle & Deploy again
+1. Launch Elastic Beanstalk env
+1. Bundle Laravel app into .zip
+1. Upload & deploy .zip on EB console
+1. Configure doc root path
+1. Add DB Instance
+1. Configure /database.php
+1. Bundle & Deploy again
 
 >>>
 
