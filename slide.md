@@ -23,6 +23,12 @@
 
 >>>
 
+- [Knowing the Corps.](#knowing-the-corps)
+  - [IL: Infinite Loop](#il-infinite-loop)
+  - [IL: gaming](#il-gaming)
+  - [IL: non-gaming](#il-non-gaming)
+  - [IL: VR/AR](#il-vrar)
+  - [求める人材像](#求める人材像)
 - [MISC](#misc)
   - [CS Books](#cs-books)
 - [AWS](#aws)
@@ -59,6 +65,7 @@
 - [Backend](#backend)
   - [IaC: What’s this?](#iac-whats-this)
   - [IaC: Products](#iac-products)
+  - [Ansible](#ansible)
   - [Search](#search)
   - [Big Data](#big-data)
   - [Connection](#connection)
@@ -96,6 +103,7 @@
   - [Dev.](#dev)
   - [Agile Dev. vs Waterfall Dev.](#agile-dev-vs-waterfall-dev)
   - [SCRUM](#scrum)
+    - [DDD](#ddd)
   - [Design Pattern: Web](#design-pattern-web)
   - [Design Pattern](#design-pattern)
   - [CI/CD Tools: Products](#cicd-tools-products)
@@ -111,6 +119,9 @@
   - [Data format used for server-client comm.](#data-format-used-for-server-client-comm)
   - [MISC](#misc-2)
   - [Maintenance](#maintenance)
+- [VR](#vr)
+  - [Virtual Cast](#virtual-cast)
+  - [VR](#vr-1)
 - [Network](#network)
   - [Network: MISC](#network-misc)
   - [Xaas](#xaas)
@@ -168,6 +179,56 @@
   - [PHP Interesting Syntax](#php-interesting-syntax)
   - [PHP Files](#php-files)
   - [PHP Constants](#php-constants)
+
+---
+
+# Knowing the Corps.
+
+>>>
+
+## IL: Infinite Loop
+
+- 「最先端の最後尾を独走する」: ゆるさ + 技術
+- staff: 160
+- Sendai + Sapporo
+- President: Matsui, Vice-president: Ono
+- 有給100%, オセロ休暇, リリース後休暇
+- 休日出勤はゼロではないがほぼない。残業は１時間くらい
+- Coronavirus: ５万
+- 札幌はXRが多い。仙台はあんまない
+- 社内勉強会
+
+## IL: gaming
+
+- Main: "Strategy" game for smartphones
+- 
+
+## IL: non-gaming
+
+- AI Haiku
+- Cyrstal Signal Pi
+  - Started as IL club activity
+- Shukiin
+- カートル
+  - Car seller + VR
+
+## IL: VR/AR
+
+- Virtual Cast
+  - Started as IL club activity
+- The Seed Online
+- 最近はゲームからXRに移行中らしい. PHPからUnityへ
+- 自社プロダクトを増やしたいとか
+
+## 求める人材像
+
+- 一点突破というか、人に見せられるものがある人。アウトプットする人
+- 社風を理解する人。
+- 長くじっくりチームで戦える人
+- 地元の人
+- 成果物はないと評価しようがないので、初心者でもそれはつくってほしい
+- こども向け教育やりたい人とか（あくまで例として）
+- これからどうしたいのか？をきちんとビジョンがある人
 
 ---
 
@@ -511,7 +572,14 @@
 
 - Ansible
 - Chef
+- Puppet
 - Terraform
+
+>>>
+
+## Ansible
+
+- Define the env by YAML
 
 >>>
 
@@ -763,6 +831,7 @@
 ## Dev.
 
 - TDD: Test-Driven Dev.
+- DDD: Domain-Driven Dev.
 - Agile Software Dev.
 - SCRUM
 - Waterfall Model
@@ -784,6 +853,13 @@
 - Sprint Planning
 - Sprint
 - Sprint Review
+
+>>>
+
+### DDD
+
+- Domain: ソフトウェアの問題解決の領域に基づいて開発する
+
 
 >>>
 
@@ -887,6 +963,29 @@
 - 定期メンテナンス
 - 緊急メンテナンス
 - 無停止メンテナンス
+
+---
+
+# VR
+
+>>>
+
+## Virtual Cast
+
+- Dwango + Infinite Loop
+- Streaming: Raw voice + Virtual avatar animation
+
+>>>
+
+## VR
+
+- HMD: Head Mount Display
+  - PlayStation VR
+  - Gear VR
+  - Google Cardboard
+  - HTC Vive
+- Dev Engine
+  - Unity
 
 ---
 
