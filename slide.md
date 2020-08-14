@@ -10,7 +10,7 @@
 4. PHP: array, control syntax
 5. PHP: interface, trait, class
 6. PHP: Class, constructor, destructor, inheritance, final
-7. IL tech blog
+7. Tech blog
 8. PHP: File IO
 9.  PHP PDO, 
 10. SQL
@@ -24,11 +24,11 @@
 >>>
 
 - [Knowing the Corps.](#knowing-the-corps)
-  - [IL: Infinite Loop](#il-infinite-loop)
-  - [IL: gaming](#il-gaming)
-  - [IL: non-gaming](#il-non-gaming)
-  - [IL: VR/AR](#il-vrar)
-  - [求める人材像](#求める人材像)
+  - [il](#il)
+  - [il: gaming](#il-gaming)
+  - [il: non-gaming](#il-non-gaming)
+  - [il: vr/ar](#il-vrar)
+  - [il: people whom they want to hire](#il-people-whom-they-want-to-hire)
 - [MISC](#misc)
   - [CS Books](#cs-books)
 - [AWS](#aws)
@@ -86,10 +86,16 @@
 - [DB](#db)
   - [DB MISC](#db-misc)
   - [SQL](#sql)
-  - [Distributed DB](#distributed-db)
+  - [Strategy to increase the DB server performance](#strategy-to-increase-the-db-server-performance)
+  - [Distributed DB: Basics](#distributed-db-basics)
+  - [Distributed DB: Advantage](#distributed-db-advantage)
+  - [Distributed DB: Keywords](#distributed-db-keywords)
   - [Transaction](#transaction)
   - [RDB](#rdb)
   - [ER](#er)
+  - [DB Partitioning: Overview](#db-partitioning-overview)
+  - [DB partitioning: Category](#db-partitioning-category)
+  - [DB partitioning:](#db-partitioning)
 - [Operating System](#operating-system)
   - [Mutual Exclusion](#mutual-exclusion)
   - [Automaton](#automaton)
@@ -114,7 +120,6 @@
   - [Redundancy Tips](#redundancy-tips)
   - [Redundancy: Number of entities](#redundancy-number-of-entities)
   - [Redundancy: Roles](#redundancy-roles)
-  - [- Main usage: Primary HTTP Server + Failover HTTP Server](#ullimain-usage-primary-http-server--failover-http-serverliul)
 - [Gaming](#gaming)
   - [Data format used for server-client comm.](#data-format-used-for-server-client-comm)
   - [MISC](#misc-2)
@@ -186,49 +191,49 @@
 
 >>>
 
-## IL: Infinite Loop
+## il
 
 - 「最先端の最後尾を独走する」: ゆるさ + 技術
 - staff: 160
 - Sendai + Sapporo
 - President: Matsui, Vice-president: Ono
-- 有給100%, オセロ休暇, リリース後休暇
-- 休日出勤はゼロではないがほぼない。残業は１時間くらい
-- Coronavirus: ５万
-- 札幌はXRが多い。仙台はあんまない
-- 社内勉強会
+- 97% employees take paid vacation / "reversi vacation", after-release vacation
+- Being forced to work on weekends is rare; overtime work is 1 hr a day?
+- Special budget for a coronavirus: 50000 jpy
+- in-compnay
 
-## IL: gaming
+## il: gaming
 
 - Main: "Strategy" game for smartphones
-- 
 
-## IL: non-gaming
+## il: non-gaming
 
 - AI Haiku
 - Cyrstal Signal Pi
   - Started as IL club activity
 - Shukiin
-- カートル
+- cartoru
   - Car seller + VR
 
-## IL: VR/AR
+## il: vr/ar
 
-- Virtual Cast
+- `Virtual Cast`
   - Started as IL club activity
-- The Seed Online
-- 最近はゲームからXRに移行中らしい. PHPからUnityへ
-- 自社プロダクトを増やしたいとか
+- `The Seed Online`
+- Shifting focus onto XR / Unity from Gaming / PHP
+- Wanna increase in-house dev instead of contracted dev
 
-## 求める人材像
+## il: people whom they want to hire
 
-- 一点突破というか、人に見せられるものがある人。アウトプットする人
-- 社風を理解する人。
-- 長くじっくりチームで戦える人
-- 地元の人
-- 成果物はないと評価しようがないので、初心者でもそれはつくってほしい
-- こども向け教育やりたい人とか（あくまで例として）
-- これからどうしたいのか？をきちんとビジョンがある人
+- Has a specific 
+- Understands the policy / culture of the il corp
+- Can work as a team member over a long time period
+- Wanna recruit local people
+- Has output
+  - Without portfolio programs, you can't judge anybody.
+  - Portfolio is precious even when it's not so sophisticated
+- Interested in the programming edu for children (sample for the people)
+- Has future vision
 
 ---
 
@@ -733,6 +738,9 @@
 
 - KVS: Key Value Store
 - memcached
+- DWH (Dataware House) vs DB
+  - 
+
 
 >>>
 
@@ -746,9 +754,48 @@
 
 >>>
 
-## Distributed DB
+## Strategy to increase the DB server performance
 
-- 
+- Distribute the DB: Master & Slaves
+- Store the DB data in the memory rather than disk
+  - With **tmpfs** of the Linux you can use certain memory space as the file system
+  - This strategy is available for the slave server, because the data in the memory isn't persistent and can be lost in the server crash
+- MySQL Cluster
+- DB partitioning
+
+>>>
+
+
+## Distributed DB: Basics
+
+- Master Server
+  - Mostly single; to populate the master, you need complicated clustering
+  - Referred for CUD of CRUD
+- Slave Servers
+  - Multiple; populating the slaves is easy
+  - A slave can has single master only
+  - Updates in the master always propagate to servers; this is one-way.
+  - Referred for R of CRUD
+    - Therefore Master-Slave architecture is powerful when reference is more frequent than updating
+
+>>>
+
+## Distributed DB: Advantage
+
+- Higher performance on DB references
+- Higher availability
+  - When the master DB is down, the slave can be the master instead
+- Higher geo-redundancy (地理的冗長性)
+  - You can put the master / slaves in the geographically distant places; this increase the tolerance to the disaster
+- Easier to get the backup
+  - Creating the backup data from the slave won't affect the performance of the master
+
+>>>
+
+## Distributed DB: Keywords
+
+- Database Polling (ポーリング)
+- Synchrnous Replication / Asynchronous Replication
 
 >>>
 
@@ -761,6 +808,30 @@
 >>>
 
 ## ER
+
+>>>
+
+## DB Partitioning: Overview
+
+- Dividing a large database with many tables into small databases
+- Advantage
+
+- MySQL supports partitioning by default
+
+
+>>>
+
+
+## DB partitioning: Category
+
+- Vertical Partitioning
+- Horizontal Partitioning
+
+>>>
+
+## DB partitioning: 
+
+- 
 
 ---
 
@@ -938,6 +1009,7 @@
   - Mainly used for the load balancing
 - Active-Passive Clustering
   - Main usage: Primary HTTP Server + Failover HTTP Server
+
 ---
 
 # Gaming
@@ -952,9 +1024,11 @@
 >>>
 
 ## MISC
+
 - DAU: Daily Active Users
 - Communication Protocol
 - HTTP
+- Concurrent Access (同時アクセス数) is like 10k - 100k, for example
 
 >>>
 
@@ -1136,6 +1210,8 @@
 >>>
 
 ## TCP / IP
+
+
 
 ---
 
