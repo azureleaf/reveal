@@ -38,7 +38,8 @@
   - [AWS Products: Computing](#aws-products-computing)
   - [AWS Products: Container](#aws-products-container)
   - [AWS: Why use Fargate?](#aws-why-use-fargate)
-  - [AWS Products: Storage](#aws-products-storage)
+  - [AWS Storage](#aws-storage)
+  - [AWS Storage: S3 vs EFS vs EBS](#aws-storage-s3-vs-efs-vs-ebs)
   - [AWS Products: Management](#aws-products-management)
   - [AWS Monitoring](#aws-monitoring)
   - [AWS Services for Networking](#aws-services-for-networking)
@@ -85,14 +86,33 @@
   - [Frontend Performance: TTFB](#frontend-performance-ttfb)
 - [DB](#db)
   - [DB MISC](#db-misc)
-  - [SQL](#sql)
+  - [3層スキーマ](#3層スキーマ)
+  - [DB Model](#db-model)
+  - [ER Diagram](#er-diagram)
+  - [DB types](#db-types)
+  - [正規形](#正規形)
+  - [従属](#従属)
+  - [演算](#演算)
+    - [関係演算](#関係演算)
+    - [集合演算](#集合演算)
+  - [SQL: Lang Types](#sql-lang-types)
+  - [SQL: SELECT](#sql-select)
+  - [DBMS](#dbms)
+  - [SQL: GRANT](#sql-grant)
+  - [Mutex for DB](#mutex-for-db)
+  - [Mutex for DB: Lock](#mutex-for-db-lock)
+  - [障害回復](#障害回復)
+  - [DB Performance](#db-performance)
   - [Strategy to increase the DB server performance](#strategy-to-increase-the-db-server-performance)
+  - [Distributed DB: MISC](#distributed-db-misc)
+  - [分散DBでの表の結合方法](#分散dbでの表の結合方法)
   - [Distributed DB: Basics](#distributed-db-basics)
   - [Distributed DB: Advantage](#distributed-db-advantage)
   - [Distributed DB: Keywords](#distributed-db-keywords)
-  - [Transaction](#transaction)
+  - [Transaction: ACID](#transaction-acid)
+  - [Transaction: Isolation Level](#transaction-isolation-level)
+  - [Transaction: Isolation MISC](#transaction-isolation-misc)
   - [RDB](#rdb)
-  - [ER](#er)
   - [DB Partitioning: Overview](#db-partitioning-overview)
   - [DB partitioning: Category](#db-partitioning-category)
   - [DB partitioning:](#db-partitioning)
@@ -102,6 +122,7 @@
 - [Computer Architecture](#computer-architecture)
   - [Memory](#memory)
   - [CPU](#cpu)
+  - [Instruction Cycle](#instruction-cycle)
   - [GPU](#gpu)
   - [Primary Storage](#primary-storage)
   - [Secondary Storage](#secondary-storage)
@@ -124,6 +145,7 @@
   - [Data format used for server-client comm.](#data-format-used-for-server-client-comm)
   - [MISC](#misc-2)
   - [Maintenance](#maintenance)
+  - [Gaming + AWSの例](#gaming--awsの例)
 - [VR](#vr)
   - [Virtual Cast](#virtual-cast)
   - [VR](#vr-1)
@@ -202,9 +224,13 @@
 - Special budget for a coronavirus: 50000 jpy
 - in-compnay
 
+>>>
+
 ## il: gaming
 
 - Main: "Strategy" game for smartphones
+
+>>>
 
 ## il: non-gaming
 
@@ -215,6 +241,8 @@
 - cartoru
   - Car seller + VR
 
+>>>
+
 ## il: vr/ar
 
 - `Virtual Cast`
@@ -223,15 +251,17 @@
 - Shifting focus onto XR / Unity from Gaming / PHP
 - Wanna increase in-house dev instead of contracted dev
 
+>>>
+
 ## il: people whom they want to hire
 
-- Has a specific 
-- Understands the policy / culture of the il corp
+- Has a specific strong interest / achievements 
+- Understands the policy / culture of our corp
 - Can work as a team member over a long time period
 - Wanna recruit local people
 - Has output
   - Without portfolio programs, you can't judge anybody.
-  - Portfolio is precious even when it's not so sophisticated
+  - Portfolio is precious source of info to know the applicants even when it's not so sophisticated
 - Interested in the programming edu for children (sample for the people)
 - Has future vision
 
@@ -322,7 +352,7 @@
 
 >>>
 
-## AWS Products: Storage
+## AWS Storage
 
 - *S3: Simple Store Service
   - Cheap
@@ -335,6 +365,17 @@
 - ElasiCache
 - RedShift
 - AWS Aurora: RDB compatible with MySQL / PostgreSQL
+
+## AWS Storage: S3 vs EFS vs EBS
+
+- S3 は Object Storage
+- EFSはNFS(Network File SYstem)
+  - OSからマウントできる。S3はHTTPS経由でアクセス
+  - EC2にマウントできる（EBSと同じ）
+  - **複数のAZにまたがる大量のEC2 Instance**から同時にアクセス可
+- EBSはBlock Storage
+  - EC2にマウントできる（EFSと同じ）
+  - **単一AZの単一のEC2からアクセス** (一つのEC２インスタンスは複数のEBSにマウントできるが)
 
 >>>
 
@@ -739,18 +780,151 @@
 - KVS: Key Value Store
 - memcached
 - DWH (Dataware House) vs DB
-  - 
+
+>>>
+
+## 3層スキーマ
+
+- Conceptual Schema
+- External Schema
+  - User / Application
+- Internal Schema
+  - Hardware
+
+>>>
+
+## DB Model
+
+- Conceptual Model
+  - ER diagram
+- Logical Model
+- Physical Model
+
+>>>
+
+## ER Diagram
+
+>>>
+
+## DB types
+
+- 階層型
+  - one root
+- ネットワーク型
+- RDB
+
+>>>
+
+## 正規形
+
+- 第一正規形
+- 第二正規形
+- 第三正規形
 
 
 >>>
 
-## SQL
+## 従属
+
+- 関数従属
+- 完全関数従属
+- 推移関数従属
+
+>>>
+
+## 演算
+
+### 関係演算
+
+- 選択
+  - 行方向の取り出し
+- 射影
+  - 列方向の取り出し
+- 結合
+  - JOIN
+- 商
+
+### 集合演算
+
+- 和
+  - ２表から単純に全ての行を取り出す
+- 差
+  - １つの表にあり、もう一方にない行を取り出す
+- 積
+  - ２表に共通する行のみ取り出す
+- 直積
+  - ２表から全てを組み合わせる
+  - 列は２倍になり、行の数は`m * n`になる
+  - 
+>>>
+
+## SQL: Lang Types
 
 - DML: Data Manipulation Language
 - DDL: Data Definition Language
   - e.g. CREATE, ALTER, DROP
 - DCL: Data Control Language
   - Define DB Authorization
+
+>>>
+
+## SQL: SELECT
+
+- WHERE: AND / OR / NOT / AS
+- DISTINCT：　重複したものは省く
+- ORDER BY: ASC / DESC
+- LIKE: 正規表現みたいな
+- IN / BETWEEN
+- EXISTS
+- 集合演算: UNION / EXCEPT / INTERSECT
+
+>>> 
+
+## DBMS
+
+
+>>>
+
+## SQL: GRANT
+
+- GRANT ALL PRIVILEGES
+- GRANT SELECT, UPDATE, INSERT, UPDATE, DELETE
+- GRANT SELECT ON products TO PUBLIC
+  - 全てのユーザーに対して与える
+- REVOKE SELECT ON products FROM user
+
+>>>
+
+## Mutex for DB
+
+- Lock
+  - 占有ロック
+  - 共有ロック
+- Timestamp
+- 楽観的制御
+
+>>>
+
+## Mutex for DB: Lock
+
+- ロックの粒度
+- ２相ロック
+  
+>>>
+
+## 障害回復
+
+- Log (aka Journal)
+  - WALでないと駄目
+  - Roll forward
+  - Roll back
+- CHeck point
+
+## DB Performance
+
+- Index
+- Hash
+- B-tree
 
 >>>
 
@@ -762,6 +936,22 @@
   - This strategy is available for the slave server, because the data in the memory isn't persistent and can be lost in the server crash
 - MySQL Cluster
 - DB partitioning
+
+>>>
+
+## Distributed DB: MISC
+
+- 2相コミット
+- ３相コミット
+- セミジョイン
+
+>>>
+
+## 分散DBでの表の結合方法
+
+- Nested Loop
+- Sort Merge
+- Hash Join
 
 >>>
 
@@ -799,7 +989,29 @@
 
 >>>
 
-## Transaction
+## Transaction: ACID
+
+- Atomicity
+- Consistency
+- Isolation
+- Durability
+  
+>>>
+
+## Transaction: Isolation Level
+
+- READ UNCOMMITTED
+- READ COMMITTED
+- REPEATABLE READ
+- SERIALIZABLE
+
+>>>
+
+## Transaction: Isolation MISC
+
+- Dirty Read
+- Non-repeatable Read
+- Phantom
 
 >>>
 
@@ -807,7 +1019,6 @@
 
 >>>
 
-## ER
 
 >>>
 
@@ -870,6 +1081,27 @@
 >>>
 
 ## CPU
+
+- ALU
+- Instruction Register: 命令レジスタ
+  - Holds the address of the current instruction fetched
+- General-purpose Register: 汎用レジスタ
+- Program Counter
+  - Address of the next instruction
+- Index Register
+- Base Register
+- Accumulator
+- 命令デコーダ
+
+>>>
+
+## Instruction Cycle
+
+1. Fetch Stage
+   1. Fetch the next instruction addr from the program counter
+   2. Store the next instruction in the instruction register
+2. Decode Stage
+3. Execute Stage
 
 >>>
 
@@ -1037,6 +1269,21 @@
 - 定期メンテナンス
 - 緊急メンテナンス
 - 無停止メンテナンス
+
+>>>
+
+## Gaming + AWSの例
+
+- APP
+  - CloudFront -> S3 -> ALB -> Apache PHP Servers
+- Storage
+  - RDS MySQL
+  - ElastiCache (Redis): セッション保存用
+  - EFS (NFS: Network File Systemの一種)
+- 運用系
+  - CloudWatch
+  - Lambda
+  - EC2
 
 ---
 
