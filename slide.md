@@ -320,7 +320,7 @@
 
 ## AWS Products: Computing
 
-- * EC2: Elastic Compute Cloud
+- *EC2: Elastic Compute Cloud
 - Lightsail
 - *Lambda
   - Run the code triggered by the events
@@ -354,17 +354,19 @@
 
 ## AWS Storage
 
-- *S3: Simple Store Service
+- **S3**: Simple Store Service
   - Cheap
-- *EBS: Elastic Block Store
+- **EBS**: Elastic Block Store
   - Virtual hard disks
-- *RDS: Relational Database Service
+- **RDS**: Relational Database Service
   - MySQL, Oracle, Postgres, SQL Server...
 - EFS: Elastic File System
 - DynamoDB
-- ElasiCache
+- ElastiCache
 - RedShift
 - AWS Aurora: RDB compatible with MySQL / PostgreSQL
+
+>>>
 
 ## AWS Storage: S3 vs EFS vs EBS
 
@@ -381,12 +383,12 @@
 
 ## AWS Products: Management
 
-- *ELB: Elastic Load Balancing
+- **ELB**: Elastic Load Balancing
   - Application LB
   - Network LB
   - Classic LB
-- *Auto Scaling
-- *CloudFormation
+- **Auto Scaling**
+- **CloudFormation**
 - IAM: Identity and Access Management
   - Control the access to the AWS accounts
 - App Mesh
@@ -396,7 +398,7 @@
 
 ## AWS Monitoring
 
-- *CloudWatch
+- **CloudWatch**
 - DataDog
   - DataDog is provided by DataDog corp, not by AWS
   - Offer the console for the AWS monitoring services
