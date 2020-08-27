@@ -32,29 +32,35 @@
 - [MISC](#misc)
   - [CS Books](#cs-books)
 - [AWS](#aws)
-  - [AWS Basics:](#aws-basics)
   - [Region & AZ](#region--az)
-  - [Creating Instance](#creating-instance)
-  - [AWS Products: Computing](#aws-products-computing)
-  - [AWS Products: Container](#aws-products-container)
+  - [Create Instance](#create-instance)
+  - [AWS Products 1/6: Computing](#aws-products-16-computing)
+  - [AWS: EC2 vs Lightsail](#aws-ec2-vs-lightsail)
+  - [AWS Products 2/6: Container](#aws-products-26-container)
   - [AWS: Why use Fargate?](#aws-why-use-fargate)
-  - [AWS Storage](#aws-storage)
+  - [AWS Products 3/6: Storage](#aws-products-36-storage)
   - [AWS Storage: S3 vs EFS vs EBS](#aws-storage-s3-vs-efs-vs-ebs)
-  - [AWS Products: Management](#aws-products-management)
-  - [AWS Monitoring](#aws-monitoring)
-  - [AWS Services for Networking](#aws-services-for-networking)
+  - [AWS Products 4/6: Management](#aws-products-46-management)
+  - [AWS Products 5/6: Monitoring](#aws-products-56-monitoring)
+  - [AWS Products 6/6: Networking](#aws-products-66-networking)
   - [AWS VPC: Features](#aws-vpc-features)
   - [AWS VPC: Keywords](#aws-vpc-keywords)
   - [AWS VPC Gateways](#aws-vpc-gateways)
   - [AWS Products: MISC](#aws-products-misc)
   - [AWS: MISC](#aws-misc)
   - [AWS: Account](#aws-account)
-  - [AWS EC2](#aws-ec2)
+  - [EC2: Amazon Linux](#ec2-amazon-linux)
+    - [Types](#types)
+  - [EC2: AMI](#ec2-ami)
+    - [Create](#create)
+  - [EC2 Instance Types: Category](#ec2-instance-types-category)
+  - [EC2 Instance Types](#ec2-instance-types)
   - [AWS VPC: Config Example 1](#aws-vpc-config-example-1)
   - [AWS VPC: Config Example 2](#aws-vpc-config-example-2)
-  - [AWS + Laravel](#aws--laravel)
+  - [AWS + Laravel (Elastic Beanstalk)](#aws--laravel-elastic-beanstalk)
+  - [AWS + Laravel (using EC2 directly)](#aws--laravel-using-ec2-directly)
   - [AWS + Laravel: Refs](#aws--laravel-refs)
-  - [AWS + Laravel:](#aws--laravel-1)
+  - [AWS + Laravel:](#aws--laravel)
   - [AWS + Laravel: References](#aws--laravel-references)
 - [Frontend](#frontend)
   - [MISC](#misc-1)
@@ -154,7 +160,7 @@
   - [Xaas](#xaas)
   - [XaaS Comparison](#xaas-comparison)
   - [VPN: What's this?](#vpn-whats-this)
-    - [Types](#types)
+    - [Types](#types-1)
   - [VPN: VPN vs Leased Line](#vpn-vpn-vs-leased-line)
   - [VPN: Internet VPN technologies](#vpn-internet-vpn-technologies)
   - [VPN: Protocols](#vpn-protocols)
@@ -174,7 +180,13 @@
   - [TCP / IP](#tcp--ip)
 - [Security](#security)
   - [Attacks](#attacks)
-  - [Encrytion](#encrytion)
+  - [Encrytion Keywords](#encrytion-keywords)
+  - [Public-key Cryptography](#public-key-cryptography)
+  - [How login works with SSH](#how-login-works-with-ssh)
+    - [On registration](#on-registration)
+    - [On login](#on-login)
+  - [SSH: Secure SHell](#ssh-secure-shell)
+    - [SSH vs SSL](#ssh-vs-ssl)
   - [CORS](#cors)
   - [CSRF](#csrf)
 - [Authentication & Authorization](#authentication--authorization)
@@ -286,13 +298,6 @@
 
 >>>
 
-## AWS Basics:
-
-- AMI: Amazon Machine Image
-- Instance
-
->>>
-
 ## Region & AZ
 
 - Region:
@@ -307,7 +312,7 @@
 
 >>>
 
-## Creating Instance
+## Create Instance
 
 1. Choose AMI
 2. Choose an instance type
@@ -318,11 +323,12 @@
 
 >>>
 
-## AWS Products: Computing
+## AWS Products 1/6: Computing
 
-- *EC2: Elastic Compute Cloud
+- **EC2**: Elastic Compute Cloud
 - Lightsail
-- *Lambda
+  - Servers + Storage + DB + Networking. Cheap
+- **Lambda**
   - Run the code triggered by the events
 - Elastic Beanstalk
   - PaaS for PHP, Node, Python, Docker... etc.
@@ -331,7 +337,27 @@
 
 >>>
 
-## AWS Products: Container
+## AWS: EC2 vs Lightsail
+
+Lightsail is a good option for small websites, test / dev env, WordPress blog
+
+- Lightsail is cheaper
+  - Lightsail has monthly fixed cost, while EC2 cost is calc by usage
+- Lightsail is all-in-one while EC2 is computing only
+  - Storage, snapshot, LB, firewall, DNS, networking
+  - With server snapshot functionality, you can duplicate the server easily
+  - LAMP / MEAN/ Node.js env is pre-configured
+  - Easy to host the website (incl. WordPress)
+- EC2 is more customizable
+  - Lightsail is highly pre-configured, and it can't be changed
+  - Lightsail service can't be linked to other AWS services with ease
+  - Lightsail can't be scaled according to the requests
+
+
+
+>>>
+
+## AWS Products 2/6: Container
 
 - ECS: Elastic Container Service
 - EKS: Elastic Kubernetes Service
@@ -352,7 +378,7 @@
 
 >>>
 
-## AWS Storage
+## AWS Products 3/6: Storage
 
 - **S3**: Simple Store Service
   - Cheap
@@ -381,7 +407,7 @@
 
 >>>
 
-## AWS Products: Management
+## AWS Products 4/6: Management
 
 - **ELB**: Elastic Load Balancing
   - Application LB
@@ -396,7 +422,7 @@
 
 >>>
 
-## AWS Monitoring
+## AWS Products 5/6: Monitoring
 
 - **CloudWatch**
 - DataDog
@@ -407,19 +433,22 @@
 
 >>>
 
-## AWS Services for Networking
+## AWS Products 6/6: Networking
 
 - CloudFront
-- VPC: Virtual Private Cloud
-  - selection of your own IP address range
-  - creation of subnets
-  - configuration of route tables and network gateways
-- Amazon Route 53: DNS service
+  - CDN service: Static / dynamic contents will be delivered from the nearest server to the user
+  - high speed delivery with cache: streaming is possible too
+- Amazon Route 53
+  - DNS service
 
 >>>
 
 ## AWS VPC: Features
 
+- VPC: Virtual Private Cloud
+  - selection of your own IP address range
+  - creation of subnets
+  - configuration of route tables and network gateways
 - Major combination
   - EBS (for permanet storage)
   - EC2 (for server software)
@@ -467,8 +496,6 @@
 - AWS Athena
 - Search S3 storage with queries
 - AWS Glue
-- AWS Lightsail
-- AWS Elastic Beanstalk
 - Amazon SNS: Simple Notification Service
 - Amazon SQS: Simple Query Service
 - AWS Snowball
@@ -488,12 +515,52 @@
 - Root Acount
 - IAM User
 
+
 >>>
 
-## AWS EC2
+## EC2: Amazon Linux
 
-- t2.micro
-  - Instance type (free tier)
+- Linux server OS of AWS
+- Amazon Linux uses `yum` like Cent OS instead of `apt`
+
+### Types
+
+- Amazon Linux
+- Amazon Linux 2
+  - available as AMI
+
+>>>
+
+## EC2: AMI
+
+- Amazon Machine Image provides the info required to launch an instance:
+  - EBS snapshot(s)
+  - Link to AWS account
+  - Block device mapping which specifies the volumes to attach to the instance on launch
+
+### Create
+
+1. Create AMI
+2. Register AMI
+3. Launch AMI
+
+>>>
+
+## EC2 Instance Types: Category
+
+- General Purpose: A, T, M
+- Compute Optimized: C
+- Memory Optimized: R, X, High Memory, z1d
+- Accelerated Computing: P, Inf, G, F
+- Storage Optimized: I, D, H
+
+>>>
+
+## EC2 Instance Types
+
+- **t2.micro** is available for free tier
+- Every instance can be Linux or Windows
+- nano < micro < small < medium < large < xlarge < 2xlarge
 
 >>>
 
@@ -513,15 +580,31 @@
 
 >>>
 
-## AWS + Laravel
+## AWS + Laravel (Elastic Beanstalk)
 
 1. Launch Elastic Beanstalk env
 1. Bundle Laravel app into .zip
 1. Upload & deploy .zip on EB console
 1. Configure doc root path
 1. Add DB Instance
-1. Configure /database.php
+1. Configure `/database.php`
 1. Bundle & Deploy again
+
+>>>
+
+## AWS + Laravel (using EC2 directly)
+
+1. Create EC2 instance
+2. Generate the SSH key pair in the `.ssh` dir
+3. Connect to EC2 with SSH
+4. Install Apache, PHP, MySQL with `yum` command
+5. Start Apache, then configure file privileges
+7. Install Composer
+8. Git clone the Laravel project, and install dependencies
+9. Configure MySQL, `.env`
+10. Run file seeding
+
+(https://qiita.com/masataka715/items/6e46f1f5e53bdff6cd3d)
 
 >>>
 
@@ -1476,7 +1559,52 @@
 >>>
 
 
-## Encrytion
+## Encrytion Keywords
+
+- Public-key Cryptography
+- Symmetric key algorithms
+- SSH is for secure connection to the server
+- SSL is for secure display of the web page
+  - HTTPS website uses SSL
+  - Uses both public-key crypt & symmetric key crypt
+- Digital Signature
+- PKI: Public Key Infrastructure
+
+>>>
+
+## Public-key Cryptography
+
+1. Recipient: Create the pair of **public key** & **private key**
+2. Recipient: Send the **public key** to the sender
+3. Sender: Get the public key of the recipient
+4. Sender: Encrypt the contents with **public key**
+5. Sender: Send the encrypted contents
+6. Recipient: Decrypt the encrypted contents with **private key**
+
+>>>
+
+## How login works with SSH
+
+### On registration
+
+1. Client generates the key pair
+2. Client send the public key to the server
+
+### On login
+
+1. Client tells the server that he wants to login
+2. Server create encrypted content with the **public key**
+3. Client decrypt the content with **private key, then give it to the server
+4. Now the server can know that it's the authentic client
+
+>>>
+
+## SSH: Secure SHell
+
+
+
+### SSH vs SSL
+
 
 >>>
 
