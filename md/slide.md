@@ -59,6 +59,7 @@
   - [AWS VPC: Config Example 2](#aws-vpc-config-example-2)
   - [AWS + Laravel (Elastic Beanstalk)](#aws--laravel-elastic-beanstalk)
   - [AWS + Laravel (using EC2 directly)](#aws--laravel-using-ec2-directly)
+    - [Ref](#ref)
   - [AWS + Laravel: Refs](#aws--laravel-refs)
   - [AWS + Laravel:](#aws--laravel)
   - [AWS + Laravel: References](#aws--laravel-references)
@@ -601,10 +602,13 @@ Lightsail is a good option for small websites, test / dev env, WordPress blog
 5. Start Apache, then configure file privileges
 7. Install Composer
 8. Git clone the Laravel project, and install dependencies
-9. Configure MySQL, `.env`
+9. Configure MySQL & `.env`
 10. Run file seeding
 
-(https://qiita.com/masataka715/items/6e46f1f5e53bdff6cd3d)
+### Ref
+
+- https://qiita.com/masataka715/items/6e46f1f5e53bdff6cd3d
+- https://qiita.com/nakm/items/0bcc6564538a0604b2ce
 
 >>>
 
@@ -1588,14 +1592,14 @@ Lightsail is a good option for small websites, test / dev env, WordPress blog
 ### On registration
 
 1. Client generates the key pair
-2. Client send the public key to the server
+2. Client sends the public key to the server
 
 ### On login
 
 1. Client tells the server that he wants to login
-2. Server create encrypted content with the **public key**
-3. Client decrypt the content with **private key, then give it to the server
-4. Now the server can know that it's the authentic client
+2. Server creates encrypted content with the **public key**
+3. Client decrypts the content with **private key, then give it to the server
+4. Now the server can know that the client is authentic
 
 >>>
 
