@@ -53,13 +53,38 @@
     <div class="reveal">
       <div class="slides">
         <section
-          data-markdown="slide.md"
+          id="md_section"
           data-separator="^\n---\n$"
           data-separator-vertical="^\n>>>\n$"
         ></section>
       </div>
     </div>
 
+    <script>
+      // Specify the default markdown file (without extension)
+      // You can select the markdown file 
+      const mdTitleDefault = "slide";
+      setAttribute(getMdTitle);
+
+      // Get the markdown file name stored in the local storage
+      function getMdTitle() {
+        if (!localStorage.getItem("md")) {
+          localStorage.setItem("md", mdTitle);
+          return mdTitleDefault;
+        } else {
+          return localStorage.getItem("md");
+        }
+      }
+
+      // Set the markdown file as the HTML attr
+      function setAttribute(callback) {
+        const mdTitle = callback();
+        console.log('Using the markdown file "' + mdTitle + '"');
+        const el = document.getElementById("md_section");
+        mdPath = "md/" + mdTitle + ".md";
+        el.setAttribute("data-markdown", mdPath);
+      }
+    </script>
     <script src="dist/reveal.js"></script>
     <script src="plugin/notes/notes.js"></script>
     <script src="plugin/markdown/markdown.js"></script>
