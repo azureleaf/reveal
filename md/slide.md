@@ -219,6 +219,8 @@
   - [PHP Interesting Syntax](#php-interesting-syntax)
   - [PHP Files](#php-files)
   - [PHP Constants](#php-constants)
+- [Tips](#tips)
+  - [Using fish](#using-fish)
 
 ---
 
@@ -1829,4 +1831,37 @@ __METHOD__
 __LINE__
 line number
 __NAMESPACE__
+```
+
+>>>
+
+# Tips
+
+>>>
+
+## Using fish
+
+```sh
+sudo apt install fish
+
+# using fish
+fish
+
+# change default (require re-login to apply change)
+chsh -s /usr/bin/fish # to fish
+chsh -s /bin/bash # to bash
+
+# config
+mkdir -p ~/.config/fish
+vim ~/.config/fish/config.fish
+
+# config file: remove greeting message on launch
+set -g -x fish_greeting ''
+
+# oh-my-fish
+curl -L https://get.oh-my.fish | fish
+omf install agnoster
+omf theme agnoster
+
+
 ```
