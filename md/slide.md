@@ -49,20 +49,26 @@
   - [AWS Products: MISC](#aws-products-misc)
   - [AWS: MISC](#aws-misc)
   - [AWS: Account](#aws-account)
+  - [EC2: Setup](#ec2-setup)
+    - [Ref](#ref)
   - [EC2: Amazon Linux](#ec2-amazon-linux)
     - [Types](#types)
   - [EC2: AMI](#ec2-ami)
     - [Create](#create)
   - [EC2 Instance Types: Category](#ec2-instance-types-category)
-  - [EC2 Instance Types](#ec2-instance-types)
+  - [EC2: Instance Types](#ec2-instance-types)
+  - [EC2: Connect to instance](#ec2-connect-to-instance)
   - [AWS VPC: Config Example 1](#aws-vpc-config-example-1)
   - [AWS VPC: Config Example 2](#aws-vpc-config-example-2)
+  - [AWS + Laravel](#aws--laravel)
   - [AWS + Laravel (Elastic Beanstalk)](#aws--laravel-elastic-beanstalk)
-  - [AWS + Laravel (using EC2 directly)](#aws--laravel-using-ec2-directly)
-    - [Ref](#ref)
-  - [AWS + Laravel: Refs](#aws--laravel-refs)
-  - [AWS + Laravel:](#aws--laravel)
+    - [Ref](#ref-1)
+  - [AWS + Laravel: Overview](#aws--laravel-overview)
   - [AWS + Laravel: References](#aws--laravel-references)
+  - [AWS + Laravel: Set up PHP](#aws--laravel-set-up-php)
+  - [AWS + Laravel: Set up Apache](#aws--laravel-set-up-apache)
+  - [AWS + Laravel: Set up Postgres](#aws--laravel-set-up-postgres)
+  - [AWS + Laravel](#aws--laravel-1)
 - [Frontend](#frontend)
   - [MISC](#misc-1)
   - [Framework](#framework)
@@ -126,6 +132,14 @@
 - [Operating System](#operating-system)
   - [Mutual Exclusion](#mutual-exclusion)
   - [Automaton](#automaton)
+  - [`service` command](#service-command)
+  - [File permission](#file-permission)
+    - [ref.](#ref-2)
+  - [chmod: ls -l](#chmod-ls--l)
+    - [rwx](#rwx)
+    - [`drwxr-xr-x`](#drwxr-xr-x)
+  - [chmod: permission](#chmod-permission)
+  - [Apache](#apache)
 - [Computer Architecture](#computer-architecture)
   - [Memory](#memory)
   - [CPU](#cpu)
@@ -519,6 +533,29 @@ Lightsail is a good option for small websites, test / dev env, WordPress blog
 - IAM User
 
 
+
+>>>
+
+## EC2: Setup
+
+1. Generate key pair (if not set yet)
+   - You can't connect to EC2 without local private key
+   - On Ubuntu, you should put the `.pem` file to `~/.ssh` dir
+2. Choose AMI
+3. Choose instance type
+4. Choose security group
+   - In the inbound rules, allow access from `anywhere` with `HTTP` & `HTTPS`
+5. Choose key pair
+6. Launch
+7. Connect with SSH
+   - `ssh -i /path/my-key-pair.pem ec2-user@my-instance-IPv6-address`
+
+
+### Ref
+
+- https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html
+- https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html#create-a-base-security-group
+
 >>>
 
 ## EC2: Amazon Linux
@@ -559,11 +596,21 @@ Lightsail is a good option for small websites, test / dev env, WordPress blog
 
 >>>
 
-## EC2 Instance Types
+## EC2: Instance Types
 
 - **t2.micro** is available for free tier
 - Every instance can be Linux or Windows
 - nano < micro < small < medium < large < xlarge < 2xlarge
+
+>>>
+
+## EC2: Connect to instance
+
+- **SSH Client**
+- EC2 Instance Connect
+- AWS Systems Manager Session Manager
+- PuTTY (Windows)
+
 
 >>>
 
@@ -583,6 +630,17 @@ Lightsail is a good option for small websites, test / dev env, WordPress blog
 
 >>>
 
+## AWS + Laravel
+
+- A. Use AWS Beanstalk
+  - Beanstalk -> My Code
+- B. Deploy the Laravel on the  EC2 directly
+  - Install LAMP, Composer manually with SSH
+  - Host Infra -> OS -> Application Server -> HTTP Server -> My Code
+
+
+>>>
+
 ## AWS + Laravel (Elastic Beanstalk)
 
 1. Launch Elastic Beanstalk env
@@ -593,55 +651,81 @@ Lightsail is a good option for small websites, test / dev env, WordPress blog
 1. Configure `/database.php`
 1. Bundle & Deploy again
 
+### Ref
+
+- https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/php-laravel-tutorial.html
+- https://dev.classmethod.jp/articles/elastic-beanstalk-laravel-deploy/
+
 >>>
 
-## AWS + Laravel (using EC2 directly)
+## AWS + Laravel: Overview
 
 1. Create EC2 instance
-2. Generate the SSH key pair in the `.ssh` dir
-3. Connect to EC2 with SSH
-4. Install Apache, PHP, MySQL with `yum` command
-5. Start Apache, then configure file privileges
-7. Install Composer
-8. Git clone the Laravel project, and install dependencies
-9. Configure MySQL & `.env`
-10. Run file seeding
+2. Connect to EC2 with SSH
+3. Install Apache, PHP, Postgres with `yum`
+4. Start Apache, then configure file privileges
+    - `sudo service httpd`
+5. Install Composer
+6. Git clone the Laravel project, and install dependencies
+7. Configure MySQL & `.env`
+8. Run file seeding
 
-### Ref
+>>>
+
+## AWS + Laravel: References
 
 - https://qiita.com/masataka715/items/6e46f1f5e53bdff6cd3d
 - https://qiita.com/nakm/items/0bcc6564538a0604b2ce
+- https://qiita.com/atto/items/e1effd28c212c3829cb0
+- https://varunver.wordpress.com/2016/06/03/centos-7-install-php-and-postgres/ (install PHP, Postgres)
 
 >>>
 
-## AWS + Laravel: Refs
+## AWS + Laravel: Set up PHP
 
-- https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/php-laravel-tutorial.html
+- `sudo yum install php -y`
+
 
 >>>
 
-## AWS + Laravel:
+## AWS + Laravel: Set up Apache
 
-- A. Use AWS Beanstalk
-  - Beanstalk -> My Code
-- B. Deploy the Laravel on the  EC2 directly
-  - Install LAMP, Composer manually with SSH
-  - Host Infra -> OS -> Application Server -> HTTP Server -> My Code
+```sh
+# install
+sudo yum install -y httpd24
+
+# start httpd
+# http daemon runs in the backgroud of web server,
+# and waits for incoming server requests
+sudo service httpd start
+
+# Add "apache" supplemental group to the user "ec2-user"
+# -a "appends" anyone to a supplemental groups
+# -G add supplemental groups
+sudo usermod -a -G apache ec2-user
+
+#
+sudo chown -R ec2-user:apache /var/www
+
+# 
+sudo chmod 2775 /var/www
+
+find /var/www -type d -exec sudo chmod 2775 {} \;
+
+find /var/www -type f -exec sudo chmod 0664 {} \;
+```
 
 >>>
 
+## AWS + Laravel: Set up Postgres
 
-## AWS + Laravel: References
-- Official
-  - https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/php-laravel-tutorial.html
-- dev.io
-  - https://dev.classmethod.jp/articles/elastic-beanstalk-laravel-deploy/
-- Qiita EC2 + RDS
-  - https://qiita.com/nakm/items/0bcc6564538a0604b2ce
-- Qiita
-  - https://qiita.com/masataka715/items/6e46f1f5e53bdff6cd3d
-- Qiita
-  - https://qiita.com/atto/items/e1effd28c212c3829cb0
+- `sudo yum install postgresql-server postgresql-contrib`
+- `sudo yum install php-pgsql`: Connector of PHP & Postgres
+
+
+>>>
+
+## AWS + Laravel
 
 ---
 
@@ -1147,6 +1231,61 @@ Lightsail is a good option for small websites, test / dev env, WordPress blog
 
 
 ## Automaton
+
+>>>
+
+## `service` command
+
+- Used to start / stop / check services
+- Then: wrapper for `/etc/init.d`, `initctl`
+- Now:  wrapper for `/etc/init.d`, `initctl`, `systemctl`
+
+>>>
+
+## File permission
+
+- chmod: Change mode (about permission)
+- chown: Change owner
+- chgrp: Change group
+
+### ref.
+
+https://qiita.com/t-a-run/items/239ed690ece7a011804a
+
+>>>
+
+## chmod: ls -l
+
+### rwx
+
+- `r` or `4`: readable
+- `w` or `2`: writable
+- `x` or `1`: executable
+- Therefore `drwxr-xr-x` is equivalent to `755`
+
+### `drwxr-xr-x`
+
+- `d`: this is a dir
+- `rwx`: **owner** can read, write, execute
+- `r-x`: **group** can read, execute
+- `r-x`: **others** can read, execute
+
+>>>
+
+## chmod: permission
+
+- `chmod 775 /var/www`
+- `chmod -R 775 /var`
+  - Change for all the files in the dir recursively 
+- `chmod 2775 /var/www`
+  - Here "2" digit is for `setgid` (set group ID)
+
+
+>>>
+
+## Apache
+
+
 
 ---
 
@@ -1854,6 +1993,9 @@ chsh -s /bin/bash # to bash
 # config
 mkdir -p ~/.config/fish
 vim ~/.config/fish/config.fish
+
+# config
+fish_config
 
 # config file: remove greeting message on launch
 set -g -x fish_greeting ''
