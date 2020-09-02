@@ -134,11 +134,19 @@
   - [Automaton](#automaton)
   - [`service` command](#service-command)
   - [File permission](#file-permission)
+  - [User Group](#user-group)
+    - [Primary Group vs Secondary Group](#primary-group-vs-secondary-group)
+    - [bash](#bash)
+    - [UID vs GID](#uid-vs-gid)
     - [ref.](#ref-2)
   - [chmod: ls -l](#chmod-ls--l)
     - [rwx](#rwx)
     - [`drwxr-xr-x`](#drwxr-xr-x)
   - [chmod: permission](#chmod-permission)
+    - [Specify all the actions](#specify-all-the-actions)
+    - [Specify one action](#specify-one-action)
+  - [chmod: Use with find command](#chmod-use-with-find-command)
+  - [chown](#chown)
   - [Apache](#apache)
 - [Computer Architecture](#computer-architecture)
   - [Memory](#memory)
@@ -677,7 +685,8 @@ Lightsail is a good option for small websites, test / dev env, WordPress blog
 - https://qiita.com/masataka715/items/6e46f1f5e53bdff6cd3d
 - https://qiita.com/nakm/items/0bcc6564538a0604b2ce
 - https://qiita.com/atto/items/e1effd28c212c3829cb0
-- https://varunver.wordpress.com/2016/06/03/centos-7-install-php-and-postgres/ (install PHP, Postgres)
+- https://varunver.wordpress.com/2016/06/03/centos-7-install-php-and-postgres/
+  - install PHP, Postgres
 
 >>>
 
@@ -1248,9 +1257,29 @@ find /var/www -type f -exec sudo chmod 0664 {} \;
 - chown: Change owner
 - chgrp: Change group
 
+https://qiita.com/t-a-run/items/239ed690ece7a011804a
+
+
+>>>
+
+## User Group
+
+### Primary Group vs Secondary Group
+
+- Primary group (aka Login group)
+  - Each user can belong to single primary group only
+- Secondary Group (aka Supplementary Group)
+
+### bash
+
+- `$ groups`
+- `$ groups john`
+
+### UID vs GID
+
 ### ref.
 
-https://qiita.com/t-a-run/items/239ed690ece7a011804a
+- https://www.networkworld.com/article/3409781/mastering-user-groups-on-linux.html
 
 >>>
 
@@ -1265,20 +1294,49 @@ https://qiita.com/t-a-run/items/239ed690ece7a011804a
 
 ### `drwxr-xr-x`
 
-- `d`: this is a dir
-- `rwx`: **owner** can read, write, execute
-- `r-x`: **group** can read, execute
-- `r-x`: **others** can read, execute
+1. `d`: this is a dir
+2. `rwx`: **owner** can read, write, execute
+3. `r-x`: **group** can read, execute
+4. `r-x`: **others** can read, execute
 
 >>>
 
 ## chmod: permission
+
+### Specify all the actions
 
 - `chmod 775 /var/www`
 - `chmod -R 775 /var`
   - Change for all the files in the dir recursively 
 - `chmod 2775 /var/www`
   - Here "2" digit is for `setgid` (set group ID)
+
+### Specify one action
+
+- `u` User (owner)
+- `g` Group
+- `o` Other
+- `a` All (user, group, other)
+- `chmod g+x /var/www` Add permission
+- `chmod ugo-wx /var/www` Revoke permission
+
+>>>
+
+## chmod: Use with find command
+
+- Find command takes "action" to execute the commands
+- `$ find . -type f -exec chmod 600 {} +`
+- `find . -type f | xargs chmod 600`
+
+
+
+>>>
+
+## chown
+
+- `chown john /var/www`
+- `chown john -R var`: All the files in the dir
+- `chown john:staff /var/www`: Owner is john, group is staff
 
 
 >>>
