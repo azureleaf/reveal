@@ -61,8 +61,8 @@
     </div>
 
     <script>
-      // Specify the default markdown file (without extension)
-      // You can select the markdown file 
+      // Specify the default markdown file (without file extension)
+      // You can select the markdown file
       const mdTitleDefault = "slide";
       setAttribute(getMdTitle);
 
@@ -80,6 +80,7 @@
       function setAttribute(callback) {
         const mdTitle = callback();
         console.log('Using the markdown file "' + mdTitle + '"');
+        console.log('Use localStorage.setItem("md", FILENAME) to set markdown file for presentation.');
         const el = document.getElementById("md_section");
         mdPath = "md/" + mdTitle + ".md";
         el.setAttribute("data-markdown", mdPath);
