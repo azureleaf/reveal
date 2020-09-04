@@ -1,7 +1,36 @@
-
 # Network
 
->>>
+---
+
+## ToC
+
+- [Network](#network)
+  - [ToC](#toc)
+  - [Network: MISC](#network-misc)
+  - [Xaas](#xaas)
+  - [XaaS Comparison](#xaas-comparison)
+  - [VPN: What's this?](#vpn-whats-this)
+    - [Types](#types)
+  - [VPN: VPN vs Leased Line](#vpn-vpn-vs-leased-line)
+  - [VPN: Internet VPN technologies](#vpn-internet-vpn-technologies)
+  - [VPN: Protocols](#vpn-protocols)
+  - [Latency vs Bandwidth](#latency-vs-bandwidth)
+  - [DNS](#dns)
+  - [IPv4:](#ipv4)
+  - [IPv6:](#ipv6)
+  - [TCP / IP Model](#tcp--ip-model)
+  - [OSI Model](#osi-model)
+  - [Tools](#tools)
+  - [Network Devices](#network-devices)
+  - [LAN Topology](#lan-topology)
+  - [LAN Access Control Methods](#lan-access-control-methods)
+  - [WLAN](#wlan)
+  - [Network Cables](#network-cables)
+  - [TCP / IP](#tcp--ip)
+  - [Cache](#cache)
+
+
+---
 
 ## Network: MISC
 
@@ -113,14 +142,13 @@
 
 - DTE: Data Terminal Equipment
 - DCE: Data Circuit Terminating Equipment
-
-## Network Devices
-
 - Hub
 - Repeater
 - Bridge
 - Router
 - Switch
+
+>>>
 
 ## LAN Topology
 
@@ -128,15 +156,20 @@
 - Star
 - Ring
 
+>>>
+
 ## LAN Access Control Methods
 
 - CSMA/CD
 - Token Passing
 
+>>>
+
 ## WLAN
 
 - 
 
+>>>
 
 ## Network Cables
 
@@ -146,3 +179,9 @@
 >>>
 
 ## TCP / IP
+
+>>>
+
+## Cache
+
+

@@ -3,7 +3,75 @@
 
 ---
 
-# Overview
+# ToC
+
+- [AWS](#aws)
+- [ToC](#toc)
+- [Products](#products)
+  - [Region & AZ](#region--az)
+  - [Create Instance](#create-instance)
+  - [Products 1: Compute](#products-1-compute)
+  - [AWS: EC2 vs Lightsail](#aws-ec2-vs-lightsail)
+  - [Products 2: Containers](#products-2-containers)
+  - [AWS: Why use Fargate?](#aws-why-use-fargate)
+  - [Products 3: Storage](#products-3-storage)
+  - [S3 vs EFS vs EBS](#s3-vs-efs-vs-ebs)
+    - [EFS](#efs)
+    - [EBS](#ebs)
+    - [S3](#s3)
+  - [Products 4: Database](#products-4-database)
+  - [ElastiCache](#elasticache)
+    - [Engine](#engine)
+    - [Purpose](#purpose)
+  - [Products 5: Security, Identity & Compliance](#products-5-security-identity--compliance)
+  - [Products 6: Cryptography & PKI](#products-6-cryptography--pki)
+  - [Products 7: Machine Learning](#products-7-machine-learning)
+  - [Products 8: Management & Governance](#products-8-management--governance)
+  - [Why need ELB?](#why-need-elb)
+  - [Types of ELB](#types-of-elb)
+  - [Products 9: Developer Tools](#products-9-developer-tools)
+  - [Products 10: Migration & Transfer](#products-10-migration--transfer)
+  - [Products 11: Networking & Contents Delivery](#products-11-networking--contents-delivery)
+  - [Products 12: Media Services](#products-12-media-services)
+- [VPC](#vpc)
+  - [AWS VPC: Features](#aws-vpc-features)
+  - [AWS VPC: Keywords](#aws-vpc-keywords)
+  - [AWS VPC Gateways](#aws-vpc-gateways)
+  - [AWS Products: MISC](#aws-products-misc)
+  - [AWS: Account](#aws-account)
+- [EC2](#ec2)
+  - [EC2: Setup](#ec2-setup)
+    - [Ref](#ref)
+  - [EC2: Amazon Linux](#ec2-amazon-linux)
+    - [Types](#types)
+  - [EC2: AMI](#ec2-ami)
+    - [Create](#create)
+  - [EC2 Instance Types: Category](#ec2-instance-types-category)
+  - [EC2: Instance Types](#ec2-instance-types)
+  - [EC2: Connect to instance](#ec2-connect-to-instance)
+  - [AWS VPC: Config Example 1](#aws-vpc-config-example-1)
+  - [AWS VPC: Config Example 2](#aws-vpc-config-example-2)
+- [Deploy to EC2](#deploy-to-ec2)
+  - [AWS + Laravel](#aws--laravel)
+  - [AWS + Laravel (Elastic Beanstalk)](#aws--laravel-elastic-beanstalk)
+    - [Ref](#ref-1)
+  - [AWS + Laravel: Overview](#aws--laravel-overview)
+  - [AWS + Laravel: References](#aws--laravel-references)
+  - [AWS + Laravel: Set up PHP](#aws--laravel-set-up-php)
+  - [AWS + Laravel: Set up Apache](#aws--laravel-set-up-apache)
+  - [AWS + Laravel: Set up Postgres](#aws--laravel-set-up-postgres)
+  - [AWS + Laravel](#aws--laravel-1)
+- [RDS](#rds)
+  - [RDS](#rds-1)
+- [AWS + Gaming](#aws--gaming)
+  - [w/o CloudFront](#wo-cloudfront)
+  - [w/ CloudFront (then)](#w-cloudfront-then)
+  - [w/ CloudFront (modern)](#w-cloudfront-modern)
+  - [System Config](#system-config)
+
+---
+
+# Products
 
 >>>
 
@@ -32,7 +100,7 @@
 
 >>>
 
-## AWS Products 1/6: Computing
+## Products 1: Compute
 
 - **EC2**: Elastic Compute Cloud
 - Lightsail
@@ -62,11 +130,9 @@ Lightsail is a good option for small websites, test / dev env, WordPress blog
   - Lightsail service can't be linked to other AWS services with ease
   - Lightsail can't be scaled according to the requests
 
-
-
 >>>
 
-## AWS Products 2/6: Container
+## Products 2: Containers
 
 - ECS: Elastic Container Service
 - EKS: Elastic Kubernetes Service
@@ -87,15 +153,45 @@ Lightsail is a good option for small websites, test / dev env, WordPress blog
 
 >>>
 
-## AWS Products 3/6: Storage
+## Products 3: Storage
 
 - **S3**: Simple Store Service
   - Cheap
 - **EBS**: Elastic Block Store
   - Virtual hard disks
-- **RDS**: Relational Database Service
-  - MySQL, Oracle, Postgres, SQL Server...
 - EFS: Elastic File System
+
+
+>>>
+
+## S3 vs EFS vs EBS
+
+### EFS
+
+- EFS is NFS (Network File System)
+- OSからマウントできる。S3はHTTPS経由でアクセス
+- EC2にマウントできる（EBSと同じ）
+- **複数のAZにまたがる大量のEC2 Instance**から同時にアクセス可
+- **expensive**
+
+### EBS
+
+- EBS is Block Storage
+- Mountable to EC2 (Same as EFS)
+- **single AZ, single EC2 instance**
+  - A EC2 instance can mount multiple EBSs, tho
+
+### S3
+
+- Object Storage
+- Multi-AZ
+- **cheap**
+
+>>>
+
+## Products 4: Database
+
+- **RDS**: Relational Database Service
 - DynamoDB
 - ElastiCache
 - RedShift
@@ -103,20 +199,37 @@ Lightsail is a good option for small websites, test / dev env, WordPress blog
 
 >>>
 
-## AWS Storage: S3 vs EFS vs EBS
+## ElastiCache
 
-- S3 は Object Storage
-- EFSはNFS(Network File SYstem)
-  - OSからマウントできる。S3はHTTPS経由でアクセス
-  - EC2にマウントできる（EBSと同じ）
-  - **複数のAZにまたがる大量のEC2 Instance**から同時にアクセス可
-- EBSはBlock Storage
-  - EC2にマウントできる（EFSと同じ）
-  - **単一AZの単一のEC2からアクセス** (一つのEC２インスタンスは複数のEBSにマウントできるが)
+### Engine
+- Redis
+- Memcached
+
+### Purpose
+
+- Data which will be accessed frequently
+- Data which won't be updated frequently
+- **session**, **DB cache**, etc.
 
 >>>
 
-## AWS Products 4/6: Management
+## Products 5: Security, Identity & Compliance
+
+- IAM: Identy & Access Management
+
+>>>
+
+## Products 6: Cryptography & PKI
+
+>>>
+
+## Products 7: Machine Learning
+
+- SageMaker
+
+>>>
+
+## Products 8: Management & Governance
 
 - **ELB**: Elastic Load Balancing
   - Application LB
@@ -124,31 +237,66 @@ Lightsail is a good option for small websites, test / dev env, WordPress blog
   - Classic LB
 - **Auto Scaling**
 - **CloudFormation**
-- IAM: Identity and Access Management
-  - Control the access to the AWS accounts
-- App Mesh
-- ParameterStore
-
->>>
-
-## AWS Products 5/6: Monitoring
-
+  - Describe the AWS system config in JSON; sort of IaC?
+- Systems Manager
+  - incl. Parameters Store
 - **CloudWatch**
-- DataDog
-  - DataDog is provided by DataDog corp, not by AWS
-  - Offer the console for the AWS monitoring services
 - CloudTrail
   - Monitor the AWS Account activity
+- (DataDog)
+  - DataDog is provided by DataDog corp, not by AWS
+  - Offer the console for the AWS monitoring services
 
 >>>
 
-## AWS Products 6/6: Networking
+## Why need ELB?
+
+- ELB distributes the load to multiple servers
+  - Smaller load to each server, higher usability
+- ELB puts the server into a maintenance mode without stopping the entire service
+  - Fault tolerent
+- ELB monitors the health of the servers
+- ELB manages the security group
+  - You can get SSL certificate
+- ELB scales according to traffic amount
+
+>>>
+
+## Types of ELB
+
+- Application Load Balancer
+  - High-spec
+  - Layer 7: distribute HTTP / HTTPS
+  - Can deal with container / micro-services
+- Network Load Balancer
+  - Millions of requests per sec
+  - Layer 4: distribute TCP / UDP / TLS traffics
+- Classic Load Balancer
+  - Layer 7 & Layer 4
+
+
+>>>
+
+## Products 9: Developer Tools
+
+>>>
+
+## Products 10: Migration & Transfer
+
+>>>
+
+## Products 11: Networking & Contents Delivery
 
 - CloudFront
   - CDN service: Static / dynamic contents will be delivered from the nearest server to the user
-  - high speed delivery with cache: streaming is possible too
+  - high speed delivery with cache: streaming is possible
+- App Mesh
 - Amazon Route 53
   - DNS service
+
+>>>
+
+## Products 12: Media Services
 
 ---
 
@@ -212,13 +360,6 @@ Lightsail is a good option for small websites, test / dev env, WordPress blog
 - Amazon SNS: Simple Notification Service
 - Amazon SQS: Simple Query Service
 - AWS Snowball
-
->>>
-
-## AWS: MISC
-
-- AWS cli
-- Amazon Linux
 
 >>>
 
@@ -309,7 +450,6 @@ Lightsail is a good option for small websites, test / dev env, WordPress blog
 - AWS Systems Manager Session Manager
 - PuTTY (Windows)
 
-
 >>>
 
 ## AWS VPC: Config Example 1
@@ -325,6 +465,10 @@ Lightsail is a good option for small websites, test / dev env, WordPress blog
 - Internet - (ELB)
   - EC2 1 in AZ 1 -> RDS 1 -> RDS 2 (replicate of RDS 1)
   - EC2 2 in AZ 2 -> RDS 1 -> RDS 2 (replicate of RDS 1)
+
+---
+
+# Deploy to EC2
 
 >>>
 
@@ -437,3 +581,39 @@ find /var/www -type f -exec sudo chmod 0664 {} \;
 ## RDS
 
 - a
+
+---
+
+# AWS + Gaming
+
+## w/o CloudFront
+
+- Internet -> ELB -> EC2 -> RDS
+
+## w/ CloudFront (then)
+
+- Route 1: Internet -> ELB -> EC2 -> RDS
+- Route 2: Internet -> CF -> S3
+
+## w/ CloudFront (modern)
+
+- `CF -> ELB (ALB) -> EC2 (Apache) -> RDS (MySQL)`
+- For static contents: CF returns the contents from the cache
+- For dynamic contents: CF do nothing, EC2 & RDS returns the contents
+
+---
+
+
+>>>
+
+## System Config
+
+- App
+  - CloudFront -> S3 -> ALB -> Apache PHP Servers
+- Storage
+  - RDS MySQL
+  - ElastiCache (Redis): セッション保存用
+  - EFS (NFS: Network File Systemの一種)
+- Management
+  - CloudWatch
+  - Lambda

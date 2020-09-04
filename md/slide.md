@@ -104,7 +104,12 @@
   - [Data format used for server-client comm.](#data-format-used-for-server-client-comm)
   - [MISC](#misc-2)
   - [Maintenance](#maintenance)
-  - [Gaming + AWSの例](#gaming--awsの例)
+  - [Frequent Fault: Data Inconsistency](#frequent-fault-data-inconsistency)
+    - [Solution](#solution)
+  - [Frequent Fault: High Load to the server](#frequent-fault-high-load-to-the-server)
+    - [Solution](#solution-1)
+  - [Frequent Fault: DB size gets enormous](#frequent-fault-db-size-gets-enormous)
+    - [Solution](#solution-2)
 - [VR](#vr)
   - [Virtual Cast](#virtual-cast)
   - [VR](#vr-1)
@@ -759,7 +764,8 @@ https://qiita.com/t-a-run/items/239ed690ece7a011804a
 - DAU: Daily Active Users
 - Communication Protocol
 - HTTP
-- Concurrent Access (同時アクセス数) is like 10k - 100k, for example
+- Concurrent Access (同時アクセス数)
+  - like 10k - 100k, for example
 
 >>>
 
@@ -771,18 +777,34 @@ https://qiita.com/t-a-run/items/239ed690ece7a011804a
 
 >>>
 
-## Gaming + AWSの例
+## Frequent Fault: Data Inconsistency
 
-- APP
-  - CloudFront -> S3 -> ALB -> Apache PHP Servers
-- Storage
-  - RDS MySQL
-  - ElastiCache (Redis): セッション保存用
-  - EFS (NFS: Network File Systemの一種)
-- 運用系
-  - CloudWatch
-  - Lambda
-  - EC2
+- Happens due to the many concurrent accesses to the DB
+
+### Solution
+
+- Lock the DB
+  - However, the range of lock must be minimum, or other users will suffer from slow performance
+
+>>>
+
+## Frequent Fault: High Load to the server
+
+### Solution
+
+- Don't forget to use INDEX on the DB
+- Integrate multiple SELECT queries into one
+
+>>>
+
+## Frequent Fault: DB size gets enormous
+
+### Solution
+
+- Don't save the unnecessary logs
+
+
+
 
 ---
 
