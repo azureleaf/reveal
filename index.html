@@ -69,7 +69,7 @@
       // Get the markdown file name stored in the local storage
       function getMdTitle() {
         if (!localStorage.getItem("md")) {
-          localStorage.setItem("md", mdTitle);
+          localStorage.setItem("md", mdTitleDefault);
           return mdTitleDefault;
         } else {
           return localStorage.getItem("md");
