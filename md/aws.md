@@ -12,6 +12,8 @@
   - [Create Instance](#create-instance)
   - [Products 1: Compute](#products-1-compute)
   - [AWS: EC2 vs Lightsail](#aws-ec2-vs-lightsail)
+  - [Compute: Why use Elastic Beanstalk?](#compute-why-use-elastic-beanstalk)
+  - [Compute: Notes on Elastic Beanstalk](#compute-notes-on-elastic-beanstalk)
   - [Products 2: Containers](#products-2-containers)
   - [AWS: Why use Fargate?](#aws-why-use-fargate)
   - [Products 3: Storage](#products-3-storage)
@@ -129,6 +131,25 @@ Lightsail is a good option for small websites, test / dev env, WordPress blog
   - Lightsail is highly pre-configured, and it can't be changed
   - Lightsail service can't be linked to other AWS services with ease
   - Lightsail can't be scaled according to the requests
+
+>>>
+
+## Compute: Why use Elastic Beanstalk?
+
+- Automatically configure the programming language-specific env
+  - e.g. PHP, Laravel, etc.
+- Automatically configure the necessary AWS services:
+  - EC2 Instance
+  - Auto Scaling Group
+  - Load Balancer
+  - CloudWatch
+
+>>>
+
+## Compute: Notes on Elastic Beanstalk
+
+- EC2 instance which is related to EB can't be stopped, seemingly
+- EB service can't be halted; it must be terminated not to consume AWS resources.
 
 >>>
 

@@ -2,6 +2,52 @@
 
 >>>
 
+## ToC
+
+- [DB](#db)
+  - [ToC](#toc)
+- [General Knowledge](#general-knowledge)
+  - [DB MISC](#db-misc)
+  - [3層スキーマ](#3層スキーマ)
+  - [DB Model](#db-model)
+  - [ER Diagram](#er-diagram)
+  - [DB types](#db-types)
+  - [正規形](#正規形)
+  - [従属](#従属)
+  - [演算](#演算)
+    - [関係演算](#関係演算)
+    - [集合演算](#集合演算)
+  - [SQL: Lang Types](#sql-lang-types)
+  - [SQL: SELECT](#sql-select)
+  - [DBMS](#dbms)
+  - [SQL: GRANT](#sql-grant)
+  - [Mutex for DB](#mutex-for-db)
+  - [Mutex for DB: Lock](#mutex-for-db-lock)
+  - [障害回復](#障害回復)
+  - [DB Performance](#db-performance)
+  - [Strategy to increase the DB server performance](#strategy-to-increase-the-db-server-performance)
+  - [Distributed DB: MISC](#distributed-db-misc)
+  - [分散DBでの表の結合方法](#分散dbでの表の結合方法)
+  - [Distributed DB: Basics](#distributed-db-basics)
+  - [Distributed DB: Advantage](#distributed-db-advantage)
+  - [Distributed DB: Keywords](#distributed-db-keywords)
+  - [Transaction: ACID](#transaction-acid)
+  - [Transaction: Isolation Level](#transaction-isolation-level)
+  - [Transaction: Isolation MISC](#transaction-isolation-misc)
+  - [RDB](#rdb)
+  - [DB Partitioning: Overview](#db-partitioning-overview)
+  - [DB partitioning: Category](#db-partitioning-category)
+  - [DB partitioning:](#db-partitioning)
+- [MySQL](#mysql)
+  - [Manage Account](#manage-account)
+  - [Basic Command](#basic-command)
+
+---
+
+# General Knowledge
+
+---
+
 ## DB MISC
 
 - KVS: Key Value Store
@@ -267,3 +313,22 @@
 ## DB partitioning: 
 
 - 
+
+---
+
+# MySQL
+
+>>>
+
+## Manage Account
+
+
+>>>
+
+## Basic Command
+
+```sql
+USE dorm_db;
+SHOW TABLES;
+exit;
+```
