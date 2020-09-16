@@ -42,8 +42,9 @@
   - [AWS Products: MISC](#aws-products-misc)
   - [AWS: Account](#aws-account)
 - [EC2](#ec2)
-  - [EC2: Setup](#ec2-setup)
+  - [Set up EC2: 1/2 Set up the key pair](#set-up-ec2-12-set-up-the-key-pair)
     - [Ref](#ref)
+  - [Set up EC2: 2/2 Create the instance](#set-up-ec2-22-create-the-instance)
   - [EC2: Amazon Linux](#ec2-amazon-linux)
     - [Types](#types)
   - [EC2: AMI](#ec2-ami)
@@ -53,23 +54,30 @@
   - [EC2: Connect to instance](#ec2-connect-to-instance)
   - [AWS VPC: Config Example 1](#aws-vpc-config-example-1)
   - [AWS VPC: Config Example 2](#aws-vpc-config-example-2)
-- [Deploy to EC2](#deploy-to-ec2)
-  - [AWS + Laravel](#aws--laravel)
-  - [AWS + Laravel (Elastic Beanstalk)](#aws--laravel-elastic-beanstalk)
+- [Deploy Laravel to AWS](#deploy-laravel-to-aws)
+  - [Use Elastic Beanstalk?](#use-elastic-beanstalk)
+  - [Procedure w/ Elastic Beanstalk](#procedure-w-elastic-beanstalk)
     - [Ref](#ref-1)
-  - [AWS + Laravel: Overview](#aws--laravel-overview)
+  - [Procedure w/o Elastic Beanstalk](#procedure-wo-elastic-beanstalk)
   - [AWS + Laravel: References](#aws--laravel-references)
-  - [AWS + Laravel: Set up PHP](#aws--laravel-set-up-php)
-  - [AWS + Laravel: Set up Apache](#aws--laravel-set-up-apache)
-  - [AWS + Laravel: Set up Postgres](#aws--laravel-set-up-postgres)
-  - [AWS + Laravel](#aws--laravel-1)
+  - [Set up PHP](#set-up-php)
+  - [Set up Apache](#set-up-apache)
+  - [Set up Postgres](#set-up-postgres)
+  - [Naka: Set up example](#naka-set-up-example)
+    - [Ref](#ref-2)
+    - [Set up procedure](#set-up-procedure)
+  - [Naka: Overview](#naka-overview)
+  - [Naka: Overview](#naka-overview-1)
+  - [Naka: Security Group](#naka-security-group)
+    - [w/o LB](#wo-lb)
+    - [w/ LB](#w-lb)
 - [RDS](#rds)
   - [RDS](#rds-1)
-- [AWS + Gaming](#aws--gaming)
+- [Cloudfront](#cloudfront)
   - [w/o CloudFront](#wo-cloudfront)
   - [w/ CloudFront (then)](#w-cloudfront-then)
   - [w/ CloudFront (modern)](#w-cloudfront-modern)
-  - [System Config](#system-config)
+  - [System Config Example](#system-config-example)
 
 ---
 
@@ -396,25 +404,34 @@ Lightsail is a good option for small websites, test / dev env, WordPress blog
 
 >>>
 
-## EC2: Setup
+## Set up EC2: 1/2 Set up the key pair
 
-1. Generate key pair (if not set yet)
+1. Create the key pair on the AWS console for OpenSSH
+   - https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair
    - You can't connect to EC2 without local private key
+2. Download the private key
    - On Ubuntu, you should put the `.pem` file to `~/.ssh` dir
-2. Choose AMI
-3. Choose instance type
-4. Choose security group
-   - In the inbound rules, allow access from `anywhere` with `HTTP` & `HTTPS`
-5. Choose key pair
-6. Launch
-7. Connect with SSH
-   - `ssh -i /path/my-key-pair.pem ec2-user@my-instance-IPv6-address`
-
+3. Change the file permission
+   - `chmod 400 my-key-pair.pem`
 
 ### Ref
 
 - https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html
 - https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html#create-a-base-security-group
+- https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html
+
+>>>
+
+## Set up EC2: 2/2 Create the instance
+
+1. Choose AMI
+2. Choose instance type
+3. Choose security group
+   - In the inbound rules, allow access from `anywhere` with `HTTP` & `HTTPS`
+4. Choose key pair
+5. Launch
+6. Connect with SSH
+   - `ssh -i /path/my-key-pair.pem ec2-user@my-instance-IPv6-address`
 
 >>>
 
@@ -489,11 +506,11 @@ Lightsail is a good option for small websites, test / dev env, WordPress blog
 
 ---
 
-# Deploy to EC2
+# Deploy Laravel to AWS
 
 >>>
 
-## AWS + Laravel
+## Use Elastic Beanstalk?
 
 - A. Use AWS Beanstalk
   - Beanstalk -> My Code
@@ -501,10 +518,9 @@ Lightsail is a good option for small websites, test / dev env, WordPress blog
   - Install LAMP, Composer manually with SSH
   - Host Infra -> OS -> Application Server -> HTTP Server -> My Code
 
-
 >>>
 
-## AWS + Laravel (Elastic Beanstalk)
+## Procedure w/ Elastic Beanstalk
 
 1. Launch Elastic Beanstalk env
 1. Bundle Laravel app into .zip
@@ -521,7 +537,7 @@ Lightsail is a good option for small websites, test / dev env, WordPress blog
 
 >>>
 
-## AWS + Laravel: Overview
+## Procedure w/o Elastic Beanstalk
 
 1. Create EC2 instance
 2. Connect to EC2 with SSH
@@ -545,14 +561,14 @@ Lightsail is a good option for small websites, test / dev env, WordPress blog
 
 >>>
 
-## AWS + Laravel: Set up PHP
+## Set up PHP
 
 - `sudo yum install php -y`
 
 
 >>>
 
-## AWS + Laravel: Set up Apache
+## Set up Apache
 
 ```sh
 # install
@@ -581,17 +597,85 @@ find /var/www -type f -exec sudo chmod 0664 {} \;
 
 >>>
 
-## AWS + Laravel: Set up Postgres
+## Set up Postgres
 
 - `sudo yum install postgresql-server postgresql-contrib`
 - `sudo yum install php-pgsql`: Connector of PHP & Postgres
 
+>>>
+
+## Naka: Set up example
+
+### Ref
+
+- Qiita AWSでウェブアプリケーション環境構築 https://qiita.com/minato-naka/items/ddb5f5301f9f590cdcbf
+
+### Set up procedure
+
+1. EC2
+   1. VPC, IGW
+   3. Subnet, Route Table
+   4. EC2 instance, Security Group (for EC2)
+   5. Apache
+2. RDS
+   1. php, git, composer
+   2. Configure Apache
+   3. Private subnet & Subnet group
+   4. Security Group (for DB)
+   5. MySQL
+   6. Laravel
+3. LB
+   1. Set up a redundant server 
+   2. ALB
+4. ElastiCache Redis
+5. Jump Server
 
 >>>
 
-## AWS + Laravel
+## Naka: Overview
 
+- IGW (VPC Interface)
+  - ALB
+    - us-east-2a AZ 
+      - Public Subnet (routing table A)
+        - Web Server Instance 1 (sec group: laravel-sg-web)
+      - Private Subnet (routing table B)
+        - RDS MySQL Instance 1 (sec group: laravel-sg-rds)
+        - Redis ElastiCache
+    - us-east-2b AZ 
+      - Public Subnet (routing table C)
+        - Web Server Instance 2 (sec group: laravel-sg-web)
+      - Private Subnet (routing table D)
+        - RDS MySQL Instance 2 (sec group: laravel-sg-rds)
+
+## Naka: Overview
+
+- IGW -> ALB -> Web Server 1 -> MySQL Server 1
+- IGW -> ALB -> Web Server 2 -> MySQL Server 1 (redundant access)
 - 
+
+>>>
+
+## Naka: Security Group
+
+### w/o LB
+ 
+`laravel-sg-web` allows:
+
+- SSH access from **my IP**
+- HTTP access from **my IP**
+
+This configuration works, however by-passing the access with LB is more secure
+
+### w/ LB
+
+`laravel-sg-web` allows:
+
+- HTTP access from **ALB security group**
+  - As you can see here, to specify the acceptable access source, you can use security group instead of IP
+
+>>>
+
 
 ---
 
@@ -601,20 +685,26 @@ find /var/www -type f -exec sudo chmod 0664 {} \;
 
 ## RDS
 
-- a
+- 
 
 ---
 
-# AWS + Gaming
+# Cloudfront
+
+>>>
 
 ## w/o CloudFront
 
 - Internet -> ELB -> EC2 -> RDS
 
+>>>
+
 ## w/ CloudFront (then)
 
 - Route 1: Internet -> ELB -> EC2 -> RDS
 - Route 2: Internet -> CF -> S3
+
+>>>
 
 ## w/ CloudFront (modern)
 
@@ -622,12 +712,9 @@ find /var/www -type f -exec sudo chmod 0664 {} \;
 - For static contents: CF returns the contents from the cache
 - For dynamic contents: CF do nothing, EC2 & RDS returns the contents
 
----
-
-
 >>>
 
-## System Config
+## System Config Example
 
 - App
   - CloudFront -> S3 -> ALB -> Apache PHP Servers

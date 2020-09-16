@@ -2,23 +2,6 @@
 
 ---
 
-## Todos
-
-1. TCP/IP
-2. SSH & Encryption
-3. Cookie & Session
-4. PHP: array, control syntax
-5. PHP: interface, trait, class
-6. PHP: Class, constructor, destructor, inheritance, final
-7. Tech blog
-8. PHP: File IO
-9.  PHP PDO, 
-10. SQL
-11. DB: Indexing, Regularization of the
-12. AWS
-
----
-
 ## ToC
 
 >>>
