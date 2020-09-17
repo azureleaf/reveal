@@ -67,7 +67,13 @@
     - [Ref](#ref-2)
     - [Set up procedure](#set-up-procedure)
   - [Naka: Overview](#naka-overview)
-  - [Naka: Overview](#naka-overview-1)
+  - [Naka: Access Flow](#naka-access-flow)
+    - [Redundant web server to the identical MySQL / Redis](#redundant-web-server-to-the-identical-mysql--redis)
+    - [Re](#re)
+  - [Naka: Subnets vs Subnet Group](#naka-subnets-vs-subnet-group)
+  - [Naka: この構成でRedisはなんの役割をしているか？](#naka-この構成でredisはなんの役割をしているか)
+  - [Naka: この構成でSecurityはどのように機能しているか？](#naka-この構成でsecurityはどのように機能しているか)
+  - [Naka: この構成でもしWebサーバが落ちたらどうなるか？](#naka-この構成でもしwebサーバが落ちたらどうなるか)
   - [Naka: Security Group](#naka-security-group)
     - [w/o LB](#wo-lb)
     - [w/ LB](#w-lb)
@@ -634,25 +640,48 @@ find /var/www -type f -exec sudo chmod 0664 {} \;
 
 ## Naka: Overview
 
-- IGW (VPC Interface)
-  - ALB
+- **IGW** (Entrance to VPC)
+  - **ALB**
     - us-east-2a AZ 
       - Public Subnet (routing table A)
-        - Web Server Instance 1 (sec group: laravel-sg-web)
+        - **Web Server Instance 1** (sec group: laravel-sg-web)
       - Private Subnet (routing table B)
-        - RDS MySQL Instance 1 (sec group: laravel-sg-rds)
-        - Redis ElastiCache
+        - **RDS MySQL Instance 1** (sec group: laravel-sg-rds)
+        - **Redis ElastiCache**
     - us-east-2b AZ 
       - Public Subnet (routing table C)
-        - Web Server Instance 2 (sec group: laravel-sg-web)
+        - **Web Server Instance 2** (sec group: laravel-sg-web)
       - Private Subnet (routing table D)
-        - RDS MySQL Instance 2 (sec group: laravel-sg-rds)
+        - **RDS MySQL Instance 2** (sec group: laravel-sg-rds)
 
-## Naka: Overview
+>>>
 
-- IGW -> ALB -> Web Server 1 -> MySQL Server 1
-- IGW -> ALB -> Web Server 2 -> MySQL Server 1 (redundant access)
-- 
+## Naka: Access Flow
+
+### Redundant web server to the identical MySQL / Redis
+
+- IGW -> ALB -> Web Server 1 -> MySQL 1 / Redis
+- IGW -> ALB -> Web Server 2 -> MySQL 1 / Redis
+
+### Re
+
+>>>
+
+## Naka: Subnets vs Subnet Group
+
+- https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.html
+
+>>>
+
+## Naka: この構成でRedisはなんの役割をしているか？
+
+>>>
+
+## Naka: この構成でSecurityはどのように機能しているか？
+
+>>>
+
+## Naka: この構成でもしWebサーバが落ちたらどうなるか？
 
 >>>
 
