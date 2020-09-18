@@ -39,6 +39,9 @@
   - [AWS VPC: Features](#aws-vpc-features)
   - [AWS VPC: Keywords](#aws-vpc-keywords)
   - [AWS VPC Gateways](#aws-vpc-gateways)
+  - [VPC: Route table is associated with...](#vpc-route-table-is-associated-with)
+  - [VPC: Route Table](#vpc-route-table)
+  - [VPC: Route Table Configs](#vpc-route-table-configs)
   - [AWS Products: MISC](#aws-products-misc)
   - [AWS: Account](#aws-account)
 - [EC2](#ec2)
@@ -60,6 +63,11 @@
     - [Ref](#ref-1)
   - [Procedure w/o Elastic Beanstalk](#procedure-wo-elastic-beanstalk)
   - [AWS + Laravel: References](#aws--laravel-references)
+  - [masataka: Laravel + AWS Setup Procedure Overview](#masataka-laravel--aws-setup-procedure-overview)
+  - [masataka: Installations](#masataka-installations)
+  - [masataka: configure file permissions on AWS](#masataka-configure-file-permissions-on-aws)
+  - [atto: Laravel + AWS](#atto-laravel--aws)
+  - [nakm: Laravel + AWS](#nakm-laravel--aws)
   - [Set up PHP](#set-up-php)
   - [Set up Apache](#set-up-apache)
   - [Set up Postgres](#set-up-postgres)
@@ -387,6 +395,30 @@ Lightsail is a good option for small websites, test / dev env, WordPress blog
 
 >>>
 
+## VPC: Route table is associated with...
+
+Routing table can be associated with various entities.
+
+1. Subnet Route Table
+1. Gateway Route Table
+2. Local Gateway Route Table
+
+>>>
+
+## VPC: Route Table 
+
+
+
+>>>
+
+## VPC: Route Table Configs
+
+- Destination
+- Target
+
+
+>>>
+
 ## AWS Products: MISC
 
 - AWS Athena
@@ -564,6 +596,74 @@ Lightsail is a good option for small websites, test / dev env, WordPress blog
 - https://qiita.com/atto/items/e1effd28c212c3829cb0
 - https://varunver.wordpress.com/2016/06/03/centos-7-install-php-and-postgres/
   - install PHP, Postgres
+
+>>>
+
+## masataka: Laravel + AWS Setup Procedure Overview
+
+- Qiita: LaravelをAWSのEC2へデプロイする手順 https://qiita.com/masataka715/items/6e46f1f5e53bdff6cd3d
+- **This tutorial doesn't use RDS???**
+
+1. SSH connect to EC2
+2. Install PHP, Apache, MySQL
+3. Configure permission of Apache
+4. Install Composer
+5. git clone existing Laravel project from GitHub
+6. Configure
+   1. Apache: `http.conf`
+   2. File permission for `var/www`
+   3. `php artisan key:generate`
+   4. Laravel: `.env`
+   5. MySQL: Add user
+7. Migration & seeding
+
+## masataka: Installations
+
+`sudo yum install -y httpd24 php71 php71-mbstring php71-zip php71-fpm php71-mysqlnd mysql57-server`
+
+- httpd24
+- php71
+- php71-mbstring
+- php71-zip
+- php71-fpm
+- php71-mysqlnd
+- mysql57-server
+
+## masataka: configure file permissions on AWS
+
+1. Add the user `ec2-user` to `apache` user group
+2. Let the `apache` group own the `var/www`
+2. Let the `apache` group write to the `var/www`
+
+>>>
+
+## atto: Laravel + AWS
+
+- [Qiita: AWSのEC2を立ち上げてLaravelのログイン機能を動かすまで](https://qiita.com/atto/items/e1effd28c212c3829cb0)
+
+1. Create EC2 Instance
+2. SSH connect
+3. Intall LAMP & `phpmyadmin`
+4. Set up Apache
+   1. `httpd.conf`
+   2. `custom.conf`
+   3. `php.ini`
+5. File permissions
+   1. Create `www` group, and let the `ec2-user` belong to it
+   2. Let the `www` group own the `var/www`
+6. Install PHP, composer
+7. Create Laravel proj
+8. Configure `custom.conf`
+   1. Change Apache root
+   2. Activate `.htaccess`
+9. 
+
+>>>
+
+## nakm: Laravel + AWS
+
+- [Qiita: laravelをAWS EC2にデプロイする](https://qiita.com/nakm/items/0bcc6564538a0604b2ce)
+
 
 >>>
 

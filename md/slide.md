@@ -53,6 +53,8 @@
     - [Specify all the actions](#specify-all-the-actions)
     - [Specify one action](#specify-one-action)
   - [chmod: Use with find command](#chmod-use-with-find-command)
+    - [Syntax](#syntax)
+    - [Samples](#samples)
   - [chown](#chown)
   - [Apache](#apache)
 - [Computer Architecture](#computer-architecture)
@@ -441,10 +443,14 @@ https://qiita.com/t-a-run/items/239ed690ece7a011804a
 ### Specify all the actions
 
 - `chmod 775 /var/www`
+  - rwx (owner), rwx (group), rx (others)
+- `chmod 664 /var/www`
+  - rw (owner), rw (group), r (others)
 - `chmod -R 775 /var`
-  - Change for all the files in the dir recursively 
+  - Change for all the files in the dir **Recursively **
 - `chmod 2775 /var/www`
   - Here "2" digit is for `setgid` (set group ID)
+
 
 ### Specify one action
 
@@ -452,16 +458,27 @@ https://qiita.com/t-a-run/items/239ed690ece7a011804a
 - `g` Group
 - `o` Other
 - `a` All (user, group, other)
-- `chmod g+x /var/www` Add permission
-- `chmod ugo-wx /var/www` Revoke permission
+- `chmod g+x /var/www`
+  - Add permission
+- `chmod ugo-wx /var/www`
+  - Revoke permission
 
 >>>
 
 ## chmod: Use with find command
 
-- Find command takes "action" to execute the commands
-- `$ find . -type f -exec chmod 600 {} +`
+Find command takes "action" to execute the commands
+
+### Syntax
+
+- `{} +`
+
+### Samples
+
+- `find . -type f -exec chmod 600 {} +`
 - `find . -type f | xargs chmod 600`
+- `find /var/www -type d -exec sudo chmod 2775 {} \;`
+- `find /var/www -type f -exec sudo chmod 0664 {} \;`
 
 
 
