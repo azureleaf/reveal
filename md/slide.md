@@ -56,7 +56,7 @@
     - [Syntax](#syntax)
     - [Samples](#samples)
   - [chown](#chown)
-  - [Apache](#apache)
+  - [`xargs`](#xargs)
 - [Computer Architecture](#computer-architecture)
   - [Memory](#memory)
   - [CPU](#cpu)
@@ -490,12 +490,11 @@ Find command takes "action" to execute the commands
 - `chown john -R var`: All the files in the dir
 - `chown john:staff /var/www`: Owner is john, group is staff
 
-
 >>>
 
-## Apache
+## `xargs`
 
-
+- 
 
 ---
 
