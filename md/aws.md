@@ -63,6 +63,8 @@
     - [Ref](#ref-1)
   - [Procedure w/o Elastic Beanstalk](#procedure-wo-elastic-beanstalk)
   - [AWS + Laravel: References](#aws--laravel-references)
+  - [AWS + LAMP + Laravel: Refs](#aws--lamp--laravel-refs)
+  - [My Installation Record](#my-installation-record)
   - [masataka: Laravel + AWS Setup Procedure Overview](#masataka-laravel--aws-setup-procedure-overview)
   - [Installations of LAMP](#installations-of-lamp)
   - [masataka: configure file permissions on AWS](#masataka-configure-file-permissions-on-aws)
@@ -599,10 +601,32 @@ Routing table can be associated with various entities.
 
 >>>
 
+## AWS + LAMP + Laravel: Refs
+
+- [AWS EC2 Doc: LAMP](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/install-LAMP.html)
+- [Qiita: LaravelをAWSのEC2へデプロイする手順](https://qiita.com/masataka715/items/6e46f1f5e53bdff6cd3d)
+  - **This tutorial doesn't use RDS???**
+- [Qiita: AWSのEC2を立ち上げてLaravelのログイン機能を動かすまで](https://qiita.com/atto/items/e1effd28c212c3829cb0)
+- [Qiita: laravelをAWS EC2にデプロイする](https://qiita.com/nakm/items/0bcc6564538a0604b2ce)
+
+>>>
+
+## My Installation Record
+
+1. Launch the EC2 Instance with Amazon Linux AMI (not Linux 2)
+1. Set up LAMP: [AWS EC2 Doc: LAMP](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/install-LAMP.html)
+   1. `yum install` dependencies
+   2. Allow TCP access to the instance
+   3. Create the new user group, and let it access to `\var\www`
+   4. `mysql_secure_installation`
+   5. Install `phpMyAdmin`
+   6. Change Apache document root to `/var/www/html`
+2. ``
+
+>>>
+
 ## masataka: Laravel + AWS Setup Procedure Overview
 
-- Qiita: LaravelをAWSのEC2へデプロイする手順 https://qiita.com/masataka715/items/6e46f1f5e53bdff6cd3d
-- **This tutorial doesn't use RDS???**
 
 1. SSH connect to EC2
 2. Install PHP, Apache, MySQL
@@ -619,32 +643,6 @@ Routing table can be associated with various entities.
 
 ## Installations of LAMP
 
-- Ref: [AWS Official](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/install-LAMP.html)
-
-
-`sudo yum install -y httpd24 php71 php71-mbstring php71-zip php71-fpm php71-mysqlnd mysql57-server`
-
-
-|    masataka    |      nakm      |       |        |
-| :------------: | :------------: | :---: | :----: |
-|      git       |      git       |       |  Git   |
-|    httpd24     |     httd24     |       | Apache |
-| mysql57-server |     mysql      |       | MySQL  |
-|     php71      |     php72      |       |        |
-| php71-mbstring | php72-mbstring |       |        |
-|   php71-zip    |                |       |        |
-|   php71-fpm    |   php72-fpm    |       |        |
-| php71-mysqlnd  | php71-mysqlnd  |       |        |
-|                |  php72-devel   |       |        |
-|                |   php72-xml    |       |        |
-|                |   php72-json   |       |        |
-|                |    php72-gd    |       |        |
-|                |   php72-pdo    |       |        |
-|                |                |       |        |
-|                |                |       |        |
-|                |                |       |        |
-|                |                |       |        |
-
 
 ## masataka: configure file permissions on AWS
 
@@ -656,7 +654,6 @@ Routing table can be associated with various entities.
 
 ## atto: Laravel + AWS
 
-- [Qiita: AWSのEC2を立ち上げてLaravelのログイン機能を動かすまで](https://qiita.com/atto/items/e1effd28c212c3829cb0)
 
 1. Create EC2 Instance
 2. SSH connect
@@ -679,7 +676,6 @@ Routing table can be associated with various entities.
 
 ## nakm: Laravel + AWS
 
-- [Qiita: laravelをAWS EC2にデプロイする](https://qiita.com/nakm/items/0bcc6564538a0604b2ce)
 
 1. Configure connection to RDS
    1. How?
