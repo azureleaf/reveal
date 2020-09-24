@@ -63,8 +63,13 @@
     - [Ref](#ref-1)
   - [Procedure w/o Elastic Beanstalk](#procedure-wo-elastic-beanstalk)
   - [AWS + Laravel: References](#aws--laravel-references)
-  - [AWS + LAMP + Laravel: Refs](#aws--lamp--laravel-refs)
-  - [My Installation Record](#my-installation-record)
+  - [AWS + Laravel: Overview](#aws--laravel-overview)
+  - [MISC](#misc)
+    - [What's phpMyAdmin?](#whats-phpmyadmin)
+  - [Step 1/4 Set up the EC2 instance](#step-14-set-up-the-ec2-instance)
+  - [Step 2/4 Set up the LAMP](#step-24-set-up-the-lamp)
+  - [Step 3/4 Set up the RDS](#step-34-set-up-the-rds)
+  - [Step 4/4 Ste up the Laravel App](#step-44-ste-up-the-laravel-app)
   - [masataka: Laravel + AWS Setup Procedure Overview](#masataka-laravel--aws-setup-procedure-overview)
   - [Installations of LAMP](#installations-of-lamp)
   - [masataka: configure file permissions on AWS](#masataka-configure-file-permissions-on-aws)
@@ -593,40 +598,74 @@ Routing table can be associated with various entities.
 
 ## AWS + Laravel: References
 
-- https://qiita.com/masataka715/items/6e46f1f5e53bdff6cd3d
-- https://qiita.com/nakm/items/0bcc6564538a0604b2ce
-- https://qiita.com/atto/items/e1effd28c212c3829cb0
-- https://varunver.wordpress.com/2016/06/03/centos-7-install-php-and-postgres/
-  - install PHP, Postgres
-
->>>
-
-## AWS + LAMP + Laravel: Refs
-
 - [AWS EC2 Doc: LAMP](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/install-LAMP.html)
 - [Qiita: LaravelをAWSのEC2へデプロイする手順](https://qiita.com/masataka715/items/6e46f1f5e53bdff6cd3d)
   - **This tutorial doesn't use RDS???**
 - [Qiita: AWSのEC2を立ち上げてLaravelのログイン機能を動かすまで](https://qiita.com/atto/items/e1effd28c212c3829cb0)
 - [Qiita: laravelをAWS EC2にデプロイする](https://qiita.com/nakm/items/0bcc6564538a0604b2ce)
+- [Qiita: AWSでウェブアプリケーション環境構築](https://qiita.com/minato-naka/items/ddb5f5301f9f590cdcbf)
+- https://varunver.wordpress.com/2016/06/03/centos-7-install-php-and-postgres/
+  - install PHP, Postgres
 
 >>>
 
-## My Installation Record
+## AWS + Laravel: Overview
 
-1. Launch the EC2 Instance with Amazon Linux AMI (not Linux 2)
-1. Set up LAMP: [AWS EC2 Doc: LAMP](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/install-LAMP.html)
+1. Set up the EC2 Instance
+   1. with Amazon Linux AMI (not Linux 2)
+2. Set up LAMP: [AWS EC2 Doc: LAMP](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/install-LAMP.html)
    1. `yum install` dependencies
-   2. Allow TCP access to the instance
+   2. Allow TCP access to the instance on the EC2 console
    3. Create the new user group, and let it access to `\var\www`
    4. `mysql_secure_installation`
    5. Install `phpMyAdmin`
    6. Change Apache document root to `/var/www/html`
-2. ``
+3. Set up the RDS
+   1. Create the subnet in the same VPC with EC2
+   2. Create the route table
+   3. Create the security group
+   4. Choose engine
+4. Set up the Laravle App
+   1. Laravel: Install composer, `git clone`
+   2. Laravel: Key generation, set `.env`
+   3. Laravel: Migration & Seeding
+
+>>>
+
+## MISC
+
+### What's phpMyAdmin?
+
+- Deal with MySQL DB
+- Manipulation of the data with GUI
+- Importing the data from CSV
+
+>>>
+
+## Step 1/4 Set up the EC2 instance
+
+>>>
+
+## Step 2/4 Set up the LAMP
+
+>>>
+
+## Step 3/4 Set up the RDS
+
+
+>>>
+
+## Step 4/4 Ste up the Laravel App
+
+```sh
+
+
+
+```
 
 >>>
 
 ## masataka: Laravel + AWS Setup Procedure Overview
-
 
 1. SSH connect to EC2
 2. Install PHP, Apache, MySQL
